@@ -67,7 +67,8 @@ Some details came from older public listings and should be confirmed:
 - [ ] Instagram handle `@sage.hall.utah` and the Facebook link
 - [ ] Admission ($6 students / $7 general) and the Tuesday lesson time (8:15–8:45)
 - [ ] Addresses for Mountain Valley Athletics and Cache Bar (blank for now, so Directions searches by name)
-- [ ] About-section facts (opened 2021, founders, 400–600 dancers a week, "biggest dance floor in Utah")
+- [ ] About-section facts (opened 2021, founders, 400–600 dancers a week). These come from a January 2023 Cache Valley Daily article.
+- [ ] Fairgrounds street address: one source says 450 S 500 W, the 2023 Cache Valley Daily article says 490 S 500 W
 - [ ] First-timer and FAQ copy. It's placeholder text.
 - [ ] Fairgrounds Indoor Barn address (assumed to be at the Cache County Fairgrounds)
 - [ ] Time and location for the Whispering Canyon Fundraiser (Oct 15) and USU Swing Club (Oct 22), both TBA on the flyer
