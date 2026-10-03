@@ -16,7 +16,7 @@
   "use strict";
 
   const TZ = "America/Denver";
-  const DEFAULT_HOURS = 3; // used for calendar exports when an event has no end time
+  const DEFAULT_HOURS = 3; // calendar-export length when the venue's end time varies or isn't set
   const MAX_REELS = 3;
   const VENUE_COLORS = ["denim", "sage", "copper", "rose", "gold"];
   const DOW = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -198,6 +198,8 @@
   function stamp(date, time) { return date.replace(/-/g, "") + (time ? `T${time.replace(":", "")}00` : ""); }
   function endOf(ev) {
     if (!ev.time) return { date: addDays(ev.date, 1), time: null };
+    // Venue's usual end time (e.g. "00:00"); an end at or before the start means after midnight.
+    if (/^\d{2}:\d{2}$/.test(ev.v.ends || "")) return { date: ev.v.ends <= ev.time ? addDays(ev.date, 1) : ev.date, time: ev.v.ends };
     const [y, m, d] = ymd(ev.date);
     const [H, M] = ev.time.split(":").map(Number);
     const end = new Date(Date.UTC(y, m - 1, d, H + DEFAULT_HOURS, M));
@@ -600,6 +602,7 @@
       color: VENUE_COLORS.includes(v.color) ? v.color : "ink",
       ages21: Boolean(v.ages21),
       note: String(v.note || "").trim(),
+      ends: String(v.ends || "").trim(),
     }));
 
     let raw = [];

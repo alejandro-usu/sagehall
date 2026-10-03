@@ -130,6 +130,20 @@ content:
           - name: ages21
             label: 21+ only
             type: boolean
+          - name: ends
+            label: Usual end time
+            type: select
+            description: Used as the end time when people add a night here to their calendar.
+            options:
+              values:
+                - { value: "varies", label: "Varies" }
+                - { value: "22:00", label: "10:00 PM" }
+                - { value: "22:30", label: "10:30 PM" }
+                - { value: "23:00", label: "11:00 PM" }
+                - { value: "23:30", label: "11:30 PM" }
+                - { value: "00:00", label: "Midnight" }
+                - { value: "00:30", label: "12:30 AM" }
+                - { value: "01:00", label: "1:00 AM" }
           - name: note
             label: Short description
             type: string

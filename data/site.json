@@ -10,34 +10,38 @@
       "address": "Cache County Fairgrounds, 450 S 500 W, Logan, UT 84321",
       "color": "denim",
       "ages21": false,
-      "note": "The home floor. Tuesday nights start with a lesson."
+      "note": "The home floor. Tuesday nights start with a lesson.",
+      "ends": "00:00"
     },
     {
       "name": "Fairgrounds Indoor Barn",
       "address": "Cache County Fairgrounds, 450 S 500 W, Logan, UT 84321",
       "color": "gold",
       "ages21": false,
-      "note": "The indoor barn at the fairgrounds."
+      "note": "The indoor barn at the fairgrounds.",
+      "ends": "00:00"
     },
     {
       "name": "Mountain Valley Athletics",
       "address": "",
       "color": "sage",
       "ages21": false,
-      "note": "Late-night Thursday and Saturday dances."
+      "note": "Late-night dances that go until midnight.",
+      "ends": "00:00"
     },
     {
       "name": "Cache Bar",
       "address": "",
       "color": "copper",
       "ages21": true,
-      "note": "Wednesday dances. Bring your ID."
+      "note": "Wednesday dances that start with instruction. Bring your ID.",
+      "ends": "varies"
     }
   ],
   "first_time": [
     {
       "title": "Come early for the lesson",
-      "text": "Most nights open with a quick lesson for beginners. On Tuesdays it runs 8:15–8:45, then open dancing until midnight."
+      "text": "Tuesday and Cache Bar nights start with instruction for beginners, so get there at the start time. Fairgrounds and Mountain Valley Athletics nights go until midnight."
     },
     {
       "title": "No partner? No problem",
@@ -55,7 +59,7 @@
     },
     {
       "question": "Do I need to know how to dance?",
-      "answer": "Nope. Show up for the lesson at the start of the night and you'll know enough to get on the floor."
+      "answer": "Nope. Tuesday and Cache Bar nights start with instruction. Come at the start time and you'll know enough to get on the floor."
     },
     {
       "question": "Are all nights all-ages?",
