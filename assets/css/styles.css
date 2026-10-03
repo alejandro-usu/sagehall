@@ -39,6 +39,7 @@
   --wrap: 1120px;
   --gutter: clamp(16px, 4vw, 32px);
   --header-h: 68px;
+  --section-pad: clamp(32px, 4vw, 52px); /* vertical padding for content sections */
 }
 
 /* ---------- base ---------- */
@@ -307,7 +308,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .btn-dir:hover { border-color: var(--denim); color: var(--denim); }
 
 /* ---------- schedule ---------- */
-.schedule { padding-block: clamp(48px, 8vw, 96px); }
+.schedule { padding-block: var(--section-pad); }
 .schedule > .wrap { max-width: 1000px; }
 .sched-head { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; margin-bottom: 1.75rem; }
 .month-title { text-align: center; }
@@ -425,7 +426,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .section-head-left { text-align: left; }
 
 /* ---------- first time ---------- */
-.first-time { padding-block: clamp(56px, 8vw, 104px); background: var(--card); border-block: 1px solid var(--line); }
+.first-time { padding-block: var(--section-pad); background: var(--card); border-block: 1px solid var(--line); }
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; counter-reset: step; }
 .steps li { position: relative; padding: 1.5rem 1.4rem 1.4rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); counter-increment: step; }
 .steps li::before {
@@ -452,7 +453,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 @media (max-width: 760px) { .ft-bottom { grid-template-columns: 1fr; } }
 
 /* ---------- venues ---------- */
-.venues { padding-block: clamp(56px, 8vw, 104px); }
+.venues { padding-block: var(--section-pad); }
 .venue-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
 .venue {
   display: flex; flex-direction: column; gap: 0.6rem;
@@ -467,7 +468,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .venue .btn-dir { align-self: flex-start; }
 
 /* ---------- reels ---------- */
-.reels { padding-block: clamp(56px, 8vw, 104px); background: var(--night); color: var(--paper); }
+.reels { padding-block: var(--section-pad); background: var(--night); color: var(--paper); }
 .reels .section-head h2 { color: var(--paper); }
 .reels .section-head .script { color: var(--copper-light); }
 .reel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; align-items: start; justify-items: center; }
@@ -509,7 +510,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 }
 
 /* ---------- about ---------- */
-.about { padding-block: clamp(56px, 8vw, 104px); }
+.about { padding-block: var(--section-pad); }
 .about-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
 .about-copy p { font-size: 1.12rem; color: var(--ink-soft); max-width: 60ch; }
 .pull-quote { margin: 1.5rem 0 0; padding: 1.25rem 1.5rem; border-left: 4px solid var(--copper); background: var(--card); border-radius: 0 var(--radius) var(--radius) 0; }
