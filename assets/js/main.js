@@ -602,16 +602,16 @@
   // "classic" was the summer theme's old name, so old links and saved picks still work.
   const THEMES = ["spring", "summer", "fall", "winter"];
   const themeName = (t) => (t === "classic" ? "summer" : THEMES.includes(t) ? t : null);
-  const THEME_COLOR = { spring: "#2f6b4f", summer: "#20448c", fall: "#22160f", winter: "#0f1c2e" };
+  const THEME_COLOR = { spring: "#2f5d46", summer: "#20448c", fall: "#22160f", winter: "#0f1c2e" };
 
-  // Drifting particles per season: leaves in fall, snow in winter, petals in spring.
+  // Drifting particles per season: aspen leaves in spring, autumn leaves in fall, snow in winter.
   const PARTICLES = {
     fall: { count: 12, icons: ["leaf-maple", "leaf-maple", "leaf-oval"], size: [14, 28], dur: [10, 18], sway: [30, 90],
             colors: ["#ee8b3a", "#c0392b", "#f4b544", "#a0522d", "#d9682b", "#8f9a3c"] },
     winter: { count: 30, icons: ["dot", "dot", "dot", "snowflake"], size: [4, 12], dur: [9, 17], sway: [15, 50],
               colors: ["#ffffff", "#e8f2fb", "#d6e8f7"] },
-    spring: { count: 16, icons: ["petal"], size: [10, 17], dur: [10, 17], sway: [40, 110],
-              colors: ["#f6b7c9", "#f3a0b8", "#fbd3df", "#ffffff", "#f8c6d4"] },
+    spring: { count: 14, icons: ["leaf-oval", "leaf-oval", "dot"], size: [10, 16], dur: [11, 18], sway: [40, 100],
+              colors: ["#a7c66b", "#8fbf6a", "#c9de8f", "#6fa86a"] },
   };
 
   function chosenTheme() {

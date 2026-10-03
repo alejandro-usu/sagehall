@@ -578,7 +578,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 @media (max-width: 880px) { .hero-sticker { width: 112px; right: -6px; top: -16px; } }
 @media (max-width: 480px) { .hero-sticker { width: 94px; top: -2px; right: -2px; } }
 
-/* Drifting leaves / snow / petals in the hero (added by main.js). */
+/* Drifting leaves or snow in the hero (added by main.js). */
 .particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .particles span {
   position: absolute; top: -40px; left: var(--x); width: var(--s); height: var(--s);
@@ -617,7 +617,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
   .theme-switch button { padding: 0 0.8rem; }
   .theme-switch .ts-label { display: none; }
 }
-.theme-switch [data-theme-choice="spring"] svg { color: #f0a3bb; }
+.theme-switch [data-theme-choice="spring"] svg { color: #9cc79a; }
 .theme-switch [data-theme-choice="summer"] svg { color: #f2b13a; }
 .theme-switch [data-theme-choice="fall"] svg { color: #ee8b3a; }
 .theme-switch [data-theme-choice="winter"] svg { color: #a9d1f0; }

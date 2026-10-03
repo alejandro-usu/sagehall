@@ -1,26 +1,35 @@
 /* ==========================================================================
-   Spring theme: blossom branches, a jar of tulips, gingham and drifting petals.
+   Spring theme: Cache Valley mountains and forest. Snow still on the peaks,
+   pines, topo-map lines, a wooden trail-sign ribbon and drifting aspen leaves.
    Scoped to <html data-theme="spring"> (see index.html and main.js).
    ========================================================================== */
 
 :root[data-theme="spring"] {
-  --paper: #fbf8f1;
-  --paper-2: #eef4e8;
-  --paper-3: #dde9d3;
+  --paper: #f4f6f1;
+  --paper-2: #e6ede2;
+  --paper-3: #d4e0d0;
   --card: #ffffff;
-  --ink: #2c3328;
-  --ink-soft: #555f51;
-  --muted: #7a8474;
-  --line: #dfe6d5;
-  --primary: #2f6b4f;
-  --primary-dark: #24543d;
-  --accent: #b9506f;
-  --accent-light: #f4b6c8;
-  --night: #2a4434;
+  --ink: #22302a;
+  --ink-soft: #4b5a52;
+  --muted: #73807a;
+  --line: #d6e0d3;
+  --primary: #2f5d46;
+  --primary-dark: #234a37;
+  --accent: #3d7487;
+  --accent-light: #a9d3e3;
+  --night: #1f3d30;
 
-  --blush: #f6c6d4;
-  --pink: #f3a0b8;
-  --gingham: rgb(126 176 120 / 0.42);
+  --forest: #1f3d30;
+  --forest-deep: #162e24;
+  --cream: #efe6cf;
+  --aspen: #c8e09a;
+  --sunrise: #f2b46d;
+  --topo: url("../img/topo.svg") repeat 0 0 / 480px;
+}
+/* Dark forest areas get lighter venue colours so dots and chips stay visible. */
+:root[data-theme="spring"] :is(.schedule, .reels) {
+  --denim: #93b2ee; --sage: #a9c48f; --copper: #f2a265; --gold: #f4c55e; --rose: #f2a0b4;
+  --accent: var(--sunrise);
 }
 
 /* ---------- swaps ---------- */
@@ -28,71 +37,88 @@
 :root[data-theme="spring"] .sticker-spring { display: block; }
 
 /* ---------- header ---------- */
-:root[data-theme="spring"] .site-header { background: rgb(255 253 248 / 0.93); }
+:root[data-theme="spring"] .site-header { background: rgb(246 249 245 / 0.93); }
 
-/* ---------- hero: soft sky ---------- */
+/* ---------- hero: morning over the mountains ---------- */
 :root[data-theme="spring"] .hero {
   background:
-    radial-gradient(40% 30% at 22% 26%, rgb(255 255 255 / 0.85), transparent 70%),
-    radial-gradient(34% 24% at 80% 18%, rgb(255 255 255 / 0.75), transparent 70%),
-    linear-gradient(#d9eef6 0%, #eef6ef 55%, #fbf6ec 100%);
+    /* the scene sits on the band (70px tall; tucked 2px under it), repeating sideways on wide screens */
+    url("../img/spring-mountains.svg") repeat-x center bottom 68px / auto 240px,
+    radial-gradient(38% 34% at 76% 26%, rgb(255 226 160 / 0.55), transparent 70%),
+    linear-gradient(#bcd9ea 0%, #dbeaee 48%, #f4ead8 100%);
 }
+:root[data-theme="spring"] .hero-grid { padding-bottom: 220px; }
 :root[data-theme="spring"] .hero::before {
-  inset: 0 auto auto 0; width: clamp(130px, 22vw, 300px); aspect-ratio: 300 / 220; opacity: 1;
-  background: url("../img/spring-corner.svg") no-repeat 0 0 / contain;
+  /* a few birds in the sky */
+  inset: 12% auto auto 6%; width: 120px; height: 50px; opacity: 0.6;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 50'%3E%3Cg fill='none' stroke='%23384a52' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M10 26 q8 -8 14 0 q6 -8 14 0'/%3E%3Cpath d='M54 12 q6 -6 11 0 q5 -6 11 0'/%3E%3Cpath d='M86 34 q5 -5 9 0 q4 -5 9 0'/%3E%3C/g%3E%3C/svg%3E") no-repeat 0 0 / contain;
   -webkit-mask-image: none; mask-image: none;
-  filter: drop-shadow(0 4px 6px rgb(60 40 50 / 0.15));
 }
 :root[data-theme="spring"] .ticket-stub::before,
-:root[data-theme="spring"] .ticket-stub::after { background: #eef5ef; }
+:root[data-theme="spring"] .ticket-stub::after { background: #dae9ee; }
 
-/* ---------- gingham band with little flowers ---------- */
+/* ---------- ranger-stripe band ---------- */
 :root[data-theme="spring"] .band {
-  height: 70px; border-top: 6px solid var(--pink);
-  background-color: #ffffff;
-  background-image:
-    url("../img/spring-band.svg"),
-    linear-gradient(90deg, var(--gingham) 50%, transparent 50%),
-    linear-gradient(var(--gingham) 50%, transparent 50%);
-  background-size: auto 100%, 24px 24px, 24px 24px;
-  background-repeat: repeat-x, repeat, repeat;
+  height: 70px; border-top: 6px solid var(--sunrise);
+  background: var(--forest) url("../img/mountain-band.svg") repeat-x 0 0 / auto 100%;
 }
-@media (max-width: 640px) { :root[data-theme="spring"] .band { height: 56px; } }
+@media (max-width: 640px) {
+  :root[data-theme="spring"] .band { height: 56px; }
+  :root[data-theme="spring"] .hero { background-position: center bottom 54px, 0 0, 0 0; }
+}
 
-/* ---------- schedule ---------- */
-:root[data-theme="spring"] .schedule { background: linear-gradient(#eef5ea, var(--paper)); }
+/* ---------- schedule: forest green with topo lines ---------- */
+:root[data-theme="spring"] .schedule {
+  --paper: #1f3d30; --paper-2: rgb(255 255 255 / 0.08); --card: rgb(14 30 22 / 0.78);
+  --line: rgb(255 255 255 / 0.14); --ink: #eef3ea; --ink-soft: #c5d3c6; --muted: #93a598;
+  --primary: var(--aspen);
+  background: var(--topo), linear-gradient(#24493a, #1b3a2d);
+  color: var(--ink);
+}
 :root[data-theme="spring"] .month-title h2 {
-  background: linear-gradient(180deg, #5f9e6c 10%, #2f6b4f 90%);
+  background: linear-gradient(180deg, #fdf4de 15%, var(--aspen) 95%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 3px 0 rgb(0 0 0 / 0.3));
 }
 :root[data-theme="spring"] .month-title .script {
+  /* wooden trail sign */
   display: inline-block; margin-top: 0.75rem; padding: 0.6rem 2.4rem 0.6rem 1.3rem;
-  font: clamp(0.78rem, 3.3vw, 1.3rem)/1.15 var(--font-display); letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;
-  color: #4a2330; background: linear-gradient(90deg, #fbd3df, var(--pink));
+  font: clamp(0.78rem, 3.3vw, 1.3rem)/1.15 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
+  color: var(--cream);
+  background:
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.05) 0 2px, transparent 2px 7px),
+    linear-gradient(180deg, #8a5a34, #6b4225);
   clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%);
 }
+:root[data-theme="spring"] .view-toggle button[aria-pressed="true"] { background: var(--cream); color: var(--forest); }
 :root[data-theme="spring"] .sched-list {
   border-top: 0; border-radius: var(--radius); padding: 0.25rem 1rem;
-  background: var(--card); border: 1px solid var(--line); box-shadow: 0 10px 30px rgb(60 80 50 / 0.08);
+  background: rgb(14 30 22 / 0.72); box-shadow: 0 10px 30px rgb(0 0 0 / 0.3);
 }
 :root[data-theme="spring"] .sched-row:last-child { border-bottom: 0; }
-:root[data-theme="spring"] .cal-dow { background: var(--primary); color: #ffffff; }
+:root[data-theme="spring"] .badge-today,
+:root[data-theme="spring"] .cal-cell.is-today .cal-day { color: var(--forest); }
+:root[data-theme="spring"] .schedule .addcal-menu { --ink: #22302a; --paper: #f4f6f1; --primary: #2f5d46; }
+:root[data-theme="spring"] .cal-dow { background: var(--sunrise); color: #2a1c10; }
+:root[data-theme="spring"] .chip { background: color-mix(in srgb, var(--v) 22%, #10241a); }
+:root[data-theme="spring"] .chip:hover { background: color-mix(in srgb, var(--v) 34%, #10241a); }
 @media (max-width: 640px) { :root[data-theme="spring"] .sched-list { padding-inline: 0.6rem; } }
 
 /* ---------- light sections ---------- */
 :root[data-theme="spring"] .section-head .script::after {
-  content: ""; display: inline-block; width: 0.62em; height: 0.62em; margin-left: 0.2em; vertical-align: 0.05em;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23f3a0b8'%3E%3Ccircle cx='12' cy='6.4' r='3.9'/%3E%3Ccircle cx='17.3' cy='10.3' r='3.9'/%3E%3Ccircle cx='15.3' cy='16.6' r='3.9'/%3E%3Ccircle cx='8.7' cy='16.6' r='3.9'/%3E%3Ccircle cx='6.7' cy='10.3' r='3.9'/%3E%3C/g%3E%3Ccircle cx='12' cy='12' r='2.6' fill='%23f6d36b'/%3E%3C/svg%3E") no-repeat center / contain;
+  content: ""; display: inline-block; width: 0.62em; height: 0.62em; margin-left: 0.2em; vertical-align: 0.02em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.5 L16 8 H14 L18 14 H15.5 L19.5 20 H13 V23 H11 V20 H4.5 L8.5 14 H6 L10 8 H8 Z' fill='%232f5d46'/%3E%3C/svg%3E") no-repeat center / contain;
 }
 
 /* ---------- reels ---------- */
-:root[data-theme="spring"] .reel-placeholder { --ph-bg: linear-gradient(160deg, #f8c9d6, #d9708f 55%, #2a4434); }
-:root[data-theme="spring"] .reel-placeholder:nth-child(2) { --ph-bg: linear-gradient(160deg, #fde7a8, #9cc48e 55%, #2a4434); }
-:root[data-theme="spring"] .reel-placeholder:nth-child(3) { --ph-bg: linear-gradient(160deg, #cfe6f7, #8fb7a0 55%, #24402f); }
+:root[data-theme="spring"] .reels { background: var(--topo), linear-gradient(#1f3d30, var(--forest-deep)); }
+:root[data-theme="spring"] .reel-placeholder { --ph-bg: linear-gradient(160deg, #bcd9ea, #5e8d6c 55%, #1f3d30); }
+:root[data-theme="spring"] .reel-placeholder:nth-child(2) { --ph-bg: linear-gradient(160deg, #f4d9a8, #c8743a 55%, #2a1c10); }
+:root[data-theme="spring"] .reel-placeholder:nth-child(3) { --ph-bg: linear-gradient(160deg, #c8e09a, #3f6f55 55%, #162e24); }
 
 /* ---------- footer ---------- */
-:root[data-theme="spring"] .site-footer { background: #24402f; color: #eef5ec; }
-:root[data-theme="spring"] .footer-h { color: #bcd9c0; }
-:root[data-theme="spring"] .footer-note { color: #a9c4ad; }
+:root[data-theme="spring"] .site-footer { background: var(--topo), var(--forest-deep); color: #e8efe4; }
+:root[data-theme="spring"] .footer-h { color: #b9d0a8; }
+:root[data-theme="spring"] .footer-note { color: #a3b8a0; }
 
-:root[data-theme="spring"] .theme-switch button[aria-pressed="true"] { background: var(--blush); color: #3a1f29; }
+:root[data-theme="spring"] .theme-switch button[aria-pressed="true"] { background: var(--aspen); color: var(--forest); }

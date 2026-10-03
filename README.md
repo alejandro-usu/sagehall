@@ -11,12 +11,12 @@ A concept redesign for [Sage Hall](https://sagehalldance.com), the country swing
 - **Instagram reels**: paste up to three reel links and they embed on the page.
 - First-timer guide, FAQ, venues, and an about section.
 - **Four seasonal looks** that share the same schedule and content:
-  - *Spring*: blossom branches, a jar of tulips, gingham and drifting petals.
+  - *Spring*: Cache Valley mountains and forest, with snow on the peaks, topo-map lines, a trail-sign ribbon and drifting aspen leaves.
   - *Summer*: cream and denim, from the September flyer.
   - *Fall*: barn wood, pumpkins and autumn leaves, from the October flyer.
   - *Winter*: a snowy night, pine boughs, buffalo plaid and falling snow.
 
-The western pattern band and boot bouquet are cut from Sage Hall's September flyer. The other seasonal artwork (wood texture, pumpkin, leaves, garlands, pine, tulips, snowy hills) was drawn for this site.
+The western pattern band and boot bouquet are cut from Sage Hall's September flyer. The other seasonal artwork (mountain scene, park badge, topo lines, wood texture, pumpkin, leaves, garlands, pine, snowy hills) was drawn for this site.
 
 ---
 
