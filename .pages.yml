@@ -84,6 +84,18 @@ content:
         label: Announcement banner
         type: string
         description: Shown in a strip at the top of every page. Leave blank to hide it.
+      - name: theme
+        label: Site theme
+        type: select
+        description: The look visitors see by default.
+        options:
+          values:
+            - { value: "classic", label: "Classic" }
+            - { value: "fall", label: "Fall" }
+      - name: theme_switcher
+        label: Show theme switcher
+        type: boolean
+        description: Shows a Classic / Fall toggle in the corner of the site. Handy for demos; turn it off when the site goes live.
       - name: instagram
         label: Instagram handle
         type: string

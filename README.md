@@ -10,8 +10,9 @@ A concept redesign for [Sage Hall](https://sagehalldance.com), the country swing
 - **Optional Google Calendar sync.** Paste a calendar ID and the site reads the schedule live from Google Calendar instead.
 - **Instagram reels**: paste up to three reel links and they embed on the page.
 - First-timer guide, FAQ, venues, and an about section.
+- **Two looks:** *Classic* (cream and denim, from the September flyer) and *Fall* (barn wood, pumpkins and autumn leaves, from the October flyer). Both share the same schedule and content.
 
-The artwork (logo, boot bouquet, and the western pattern band) is cut from Sage Hall's September flyer.
+The western pattern band and boot bouquet are cut from Sage Hall's September flyer. The fall wood texture, pumpkin, leaves and garland were drawn for this site.
 
 ---
 
@@ -54,7 +55,18 @@ If staff would rather use the Google Calendar app on their phones:
 
 The site then reads events from Google Calendar and shows "Subscribe" links under the schedule. Put the venue name, or its address, in each event's **location**. Start a title with "Cancelled" to mark a night as cancelled. If Google can't be reached, the site falls back to `data/events.json`.
 
-## 4. Instagram reels
+## 4. Themes: Classic and Fall
+
+Both looks are the same page with different styling, so they always show the same schedule and settings. There's nothing extra to host.
+
+- **Links to share:** add `?theme=classic` or `?theme=fall` to the site address, e.g. `https://alejandro-usu.github.io/sagehall/?theme=fall`.
+- **Switch in the corner:** a Classic / Fall toggle floats in the bottom-right corner. It remembers the visitor's pick.
+- **Default look:** **Site settings → Site theme** sets what first-time visitors see, so the site can go fall in October and back to classic later.
+- **Hide the switch** when the site goes live with **Site settings → Show theme switcher**.
+
+The fall styles live in `assets/css/theme-fall.css`. Everything in it is scoped to `<html data-theme="fall">`.
+
+## 5. Instagram reels
 
 In Instagram, open a reel and tap **Share → Copy link**, then paste the link under **Site settings → Instagram reels**. The first three show on the home page. Until reels are added, the section shows placeholder cards.
 
@@ -83,7 +95,8 @@ Some details came from older public listings and should be confirmed:
 | `data/site.json` | Announcement, social links, venues, reels, FAQ, Google Calendar settings |
 | `.pages.yml` | Pages CMS form definitions |
 | `assets/js/main.js` | Schedule, calendar export, Google Calendar sync, reels |
-| `assets/css/styles.css` | Styles |
-| `assets/img/` | Logo, boot art, pattern band, favicon |
+| `assets/css/styles.css` | Styles (classic look) |
+| `assets/css/theme-fall.css` | Fall look, applied on top of the classic styles |
+| `assets/img/` | Logos (regular and light-on-dark), boot art, pattern band, fall artwork, favicon |
 
 All times are Cache Valley local time (America/Denver).

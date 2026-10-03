@@ -1,0 +1,166 @@
+/* ==========================================================================
+   Fall / October theme, based on the October flyer: weathered barn wood,
+   pumpkins, autumn leaves, gold lettering and an orange ribbon.
+   Everything is scoped to <html data-theme="fall">, set by the inline script
+   in index.html and by main.js.
+   ========================================================================== */
+
+:root[data-theme="fall"] {
+  --paper: #f6ead8;
+  --paper-2: #eedcc2;
+  --paper-3: #e2c9a6;
+  --card: #fdf6ea;
+  --ink: #2e2018;
+  --ink-soft: #5b4636;
+  --muted: #7c6553;
+  --line: #e2cdb0;
+  --primary: #b4531c;
+  --primary-dark: #8f3f12;
+  --copper: #a8521f;
+  --copper-light: #f0a35a;
+  --night: #24170f;
+
+  --pumpkin: #ee8b3a;
+  --harvest: #f4b544;
+  --cream: #f6e8d2;
+  --espresso: #22160f;
+  --on-wood: #f3e6d2;
+  --wood: url("../img/wood.jpg") repeat 0 0 / 640px;
+}
+
+/* Dark wood areas get lighter venue colours so dots and chips stay visible. */
+:root[data-theme="fall"] :is(.schedule, .reels) {
+  --denim: #93b2ee; --sage: #a9c48f; --copper: #f2a265; --gold: #f4c55e; --rose: #f2a0b4;
+}
+
+/* ---------- swaps ---------- */
+:root[data-theme="fall"] .logo-dark,
+:root[data-theme="fall"] .hero-boot { display: none; }
+:root[data-theme="fall"] .logo-light { display: block; }
+
+/* ---------- header ---------- */
+:root[data-theme="fall"] .site-header { background: rgb(34 22 15 / 0.93); border-bottom-color: rgb(255 255 255 / 0.08); }
+:root[data-theme="fall"] .brand,
+:root[data-theme="fall"] .site-nav a { color: var(--on-wood); }
+:root[data-theme="fall"] .site-nav a:hover { background: rgb(255 255 255 / 0.08); color: var(--harvest); }
+:root[data-theme="fall"] .site-nav .nav-cta { background: var(--pumpkin); color: #2a170c; }
+:root[data-theme="fall"] .site-nav .nav-cta:hover { background: var(--harvest); color: #2a170c; }
+:root[data-theme="fall"] .menu-btn { border-color: var(--on-wood); color: var(--on-wood); }
+@media (max-width: 880px) {
+  :root[data-theme="fall"] .site-nav { background: var(--espresso); border-bottom-color: rgb(255 255 255 / 0.08); }
+  :root[data-theme="fall"] .site-nav a { border-bottom-color: rgb(255 255 255 / 0.12); }
+}
+
+/* ---------- hero ---------- */
+:root[data-theme="fall"] .hero {
+  background:
+    radial-gradient(120% 90% at 50% 35%, rgb(22 14 9 / 0.3) 0%, rgb(22 14 9 / 0.72) 100%),
+    #2b1d14 var(--wood);
+}
+:root[data-theme="fall"] .hero::before {
+  /* garland in the top-left corner */
+  inset: 0 auto auto 0; width: clamp(130px, 22vw, 300px); aspect-ratio: 300 / 220; opacity: 1;
+  background: url("../img/fall-corner.svg") no-repeat 0 0 / contain;
+  -webkit-mask-image: none; mask-image: none;
+  filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.35));
+}
+:root[data-theme="fall"] .hero-script { color: #fbf1e1; }
+:root[data-theme="fall"] .hero-lede { color: #e9d9c2; }
+:root[data-theme="fall"] .hero .btn-primary { background: var(--pumpkin); color: #2a170c; }
+:root[data-theme="fall"] .hero .btn-primary:hover { background: var(--harvest); color: #2a170c; }
+:root[data-theme="fall"] .hero .btn-ghost { border-color: var(--on-wood); color: var(--on-wood); }
+:root[data-theme="fall"] .hero .btn-ghost:hover { background: var(--on-wood); color: #2a170c; }
+
+:root[data-theme="fall"] .hero-pumpkin {
+  display: block; position: absolute; z-index: 2; width: 150px; right: -28px; top: -100px;
+  transform: rotate(6deg); filter: drop-shadow(0 8px 12px rgb(0 0 0 / 0.4)); pointer-events: none;
+}
+@media (max-width: 880px) {
+  :root[data-theme="fall"] .hero-pumpkin { width: 112px; right: -6px; top: -16px; }
+}
+@media (max-width: 480px) {
+  :root[data-theme="fall"] .hero-pumpkin { width: 94px; top: -2px; right: -2px; }
+}
+/* ticket notches show the dark wood behind the ticket */
+:root[data-theme="fall"] .ticket-stub::before,
+:root[data-theme="fall"] .ticket-stub::after { background: #2a1c14; border-color: rgb(255 255 255 / 0.12); }
+
+/* falling leaves (added by main.js; hidden for reduced motion) */
+.leaf-fall { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.leaf-fall span {
+  position: absolute; top: -40px; left: var(--x); width: var(--s); height: var(--s);
+  animation: leaf-fall var(--d) linear var(--delay) infinite;
+}
+.leaf-fall svg { width: 100%; height: 100%; animation: leaf-spin calc(var(--d) / 3) ease-in-out var(--delay) infinite alternate; }
+@keyframes leaf-fall {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: 0.85; }
+  50% { transform: translate3d(var(--sway), 55vh, 0); }
+  88% { opacity: 0.85; }
+  100% { transform: translate3d(calc(var(--sway) * -0.3), 110vh, 0); opacity: 0; }
+}
+@keyframes leaf-spin { from { transform: rotate(-35deg); } to { transform: rotate(55deg); } }
+@media (prefers-reduced-motion: reduce) { .leaf-fall { display: none; } }
+
+/* ---------- leaf band ---------- */
+:root[data-theme="fall"] .band {
+  height: 90px; border-top-color: var(--harvest);
+  background: #b9561a url("../img/fall-band.svg") repeat-x 0 0 / auto 100%;
+}
+@media (max-width: 640px) { :root[data-theme="fall"] .band { height: 70px; } }
+
+/* ---------- schedule: dark wood with a flyer-style panel ---------- */
+:root[data-theme="fall"] .schedule {
+  --paper: #2a1c14; --paper-2: rgb(255 255 255 / 0.08); --card: rgb(24 16 11 / 0.8);
+  --line: rgb(255 255 255 / 0.14); --ink: var(--on-wood); --ink-soft: #dcc9b0; --muted: #a8937c;
+  --primary: var(--harvest);
+  background: linear-gradient(rgb(22 14 9 / 0.55), rgb(22 14 9 / 0.7)), #2b1d14 var(--wood);
+  color: var(--ink);
+}
+:root[data-theme="fall"] .month-title h2 {
+  background: linear-gradient(180deg, #ffd889 10%, #f0a03c 90%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 3px 0 rgb(0 0 0 / 0.35));
+}
+:root[data-theme="fall"] .month-title .script {
+  /* the flyer's orange ribbon */
+  display: inline-block; margin-top: 0.75rem; padding: 0.6rem 2.4rem 0.6rem 1.3rem;
+  font: clamp(0.78rem, 3.3vw, 1.3rem)/1.15 var(--font-display); letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;
+  color: #2a170c; background: linear-gradient(90deg, #f7b26b, var(--pumpkin));
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%);
+}
+:root[data-theme="fall"] .view-toggle button[aria-pressed="true"] { background: var(--on-wood); color: #2a170c; }
+:root[data-theme="fall"] .sched-list {
+  border-top: 0; border-radius: var(--radius); padding: 0.25rem 1rem;
+  background: rgb(20 13 9 / 0.74); box-shadow: 0 10px 30px rgb(0 0 0 / 0.3);
+}
+:root[data-theme="fall"] .sched-row:last-child { border-bottom: 0; }
+:root[data-theme="fall"] .badge-today,
+:root[data-theme="fall"] .cal-cell.is-today .cal-day { color: #2a170c; }
+:root[data-theme="fall"] .schedule .addcal-menu { --ink: #2e2018; --paper: #f6ead8; --primary: #b4531c; }
+:root[data-theme="fall"] .cal-dow { background: var(--pumpkin); color: #2a170c; }
+:root[data-theme="fall"] .chip { background: color-mix(in srgb, var(--v) 22%, #1a110c); }
+:root[data-theme="fall"] .chip:hover { background: color-mix(in srgb, var(--v) 34%, #1a110c); }
+@media (max-width: 640px) { :root[data-theme="fall"] .sched-list { padding-inline: 0.6rem; } }
+
+/* ---------- light sections ---------- */
+:root[data-theme="fall"] .section-head .script::after {
+  content: ""; display: inline-block; width: 0.62em; height: 0.62em; margin-left: 0.2em; vertical-align: 0.05em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 6 L58 24 L66 20 L62 44 L74 34 L77 42 L90 40 L85 54 L92 58 L70 72 L73 82 L52 78 L52 96 L48 96 L48 78 L27 82 L30 72 L8 58 L15 54 L10 40 L23 42 L26 34 L38 44 L34 20 L42 24 Z' fill='%23d9682b'/%3E%3C/svg%3E") no-repeat center / contain;
+  transform: rotate(18deg);
+}
+
+/* ---------- reels ---------- */
+:root[data-theme="fall"] .reels { background: linear-gradient(rgb(18 11 7 / 0.7), rgb(18 11 7 / 0.8)), #24170f var(--wood); }
+:root[data-theme="fall"] .reel-placeholder { --ph-bg: linear-gradient(160deg, #f6b04f, #c2571a 55%, #4a1f0e); }
+:root[data-theme="fall"] .reel-placeholder:nth-child(2) { --ph-bg: linear-gradient(160deg, #ecc56a, #8c3b14 55%, #2a170c); }
+:root[data-theme="fall"] .reel-placeholder:nth-child(3) { --ph-bg: linear-gradient(160deg, #c9a24a, #7a3b1f 50%, #2a1c14); }
+
+/* ---------- footer ---------- */
+:root[data-theme="fall"] .site-footer { background: linear-gradient(rgb(18 11 7 / 0.78), rgb(18 11 7 / 0.86)), var(--espresso) var(--wood); color: #efe2cf; }
+:root[data-theme="fall"] .footer-h { color: #d9b98a; }
+:root[data-theme="fall"] .footer-note { color: #cbb497; }
+
+/* ---------- theme switch on the fall look ---------- */
+:root[data-theme="fall"] .theme-switch button[aria-pressed="true"] { background: var(--pumpkin); color: #2a170c; }
+:root[data-theme="fall"] .theme-switch svg { color: currentColor; }

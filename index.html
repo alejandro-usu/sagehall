@@ -13,7 +13,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=Sacramento&display=swap" rel="stylesheet">
+  <script>
+    /* Apply the theme before first paint so the page never flashes the wrong look.
+       Order: ?theme= in the URL, then the visitor's last pick, then the site default
+       (cached from data/site.json). main.js takes over once the page loads. */
+    (function () {
+      var ok = { classic: 1, fall: 1 }, q = new URLSearchParams(location.search).get("theme"), t = ok[q] ? q : null;
+      try { t = t || localStorage.getItem("sagehall:theme") || localStorage.getItem("sagehall:default-theme"); } catch (e) {}
+      if (t === "fall") document.documentElement.setAttribute("data-theme", "fall");
+    })();
+  </script>
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/theme-fall.css">
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -26,7 +37,8 @@
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="#top" aria-label="Sage Hall home">
-        <img src="assets/img/sage-hall-logo.png" alt="" width="46" height="46">
+        <img class="logo-dark" src="assets/img/sage-hall-logo.png" alt="" width="46" height="46">
+        <img class="logo-light" src="assets/img/sage-hall-logo-light.png" alt="" width="46" height="46">
         <span>Sage Hall</span>
       </a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -53,7 +65,8 @@
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <h1 class="visually-hidden">Sage Hall</h1>
-          <img class="hero-logo" src="assets/img/sage-hall-logo.png" alt="Sage Hall" width="340" height="331">
+          <img class="hero-logo logo-dark" src="assets/img/sage-hall-logo.png" alt="Sage Hall" width="340" height="331">
+          <img class="hero-logo logo-light" src="assets/img/sage-hall-logo-light.png" alt="Sage Hall" width="340" height="331">
           <p class="script hero-script">Country Swing Dancing</p>
           <p class="hero-lede">Dance nights several times a week around Logan. Come solo, bring a date, or bring the whole crew.</p>
           <div class="hero-cta">
@@ -64,6 +77,7 @@
 
         <div class="hero-side">
           <img class="hero-boot" src="assets/img/boot-bouquet.png" alt="" width="271" height="321">
+          <img class="hero-pumpkin" src="assets/img/pumpkin.svg" alt="" width="160" height="150">
           <aside class="ticket" id="next-dance" aria-labelledby="next-dance-label" aria-live="polite">
             <p class="ticket-kicker" id="next-dance-label">Next dance</p>
             <div class="ticket-body">
@@ -214,6 +228,14 @@
     <p class="wrap footer-note">© <span id="year">2026</span> Sage Hall · Concept redesign mock-up, not the official site. Visit <a href="https://sagehalldance.com">sagehalldance.com</a> for official info.</p>
   </footer>
 
+  <!-- Classic / Fall switch (shown when Site settings → "Show theme switcher" is on) -->
+  <div class="theme-switch" id="theme-switch" role="group" aria-label="Site theme" hidden>
+    <button type="button" data-theme-choice="classic" aria-pressed="true">Classic</button>
+    <button type="button" data-theme-choice="fall" aria-pressed="false">
+      <svg aria-hidden="true" viewBox="0 0 100 100"><use href="#i-leaf-maple"/></svg> Fall
+    </button>
+  </div>
+
   <!-- Icon sprite -->
   <svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
     <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></symbol>
@@ -226,6 +248,8 @@
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.6" fill="currentColor"/></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-leaf-maple" viewBox="0 0 100 100"><path d="M50 6 L58 24 L66 20 L62 44 L74 34 L77 42 L90 40 L85 54 L92 58 L70 72 L73 82 L52 78 L52 96 L48 96 L48 78 L27 82 L30 72 L8 58 L15 54 L10 40 L23 42 L26 34 L38 44 L34 20 L42 24 Z" fill="currentColor"/></symbol>
+    <symbol id="i-leaf-oval" viewBox="0 0 100 100"><path d="M50 4 C78 26 80 66 50 96 C20 66 22 26 50 4 Z" fill="currentColor"/><path d="M50 12 L50 90" stroke="rgb(0 0 0 / 0.25)" stroke-width="3"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.1 6.6.5-5 4.4 1.5 6.5L12 16.6 6.3 20l1.5-6.5-5-4.4 6.6-.5z" fill="currentColor"/></symbol>
   </svg>
 </body>

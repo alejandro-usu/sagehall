@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="90" viewBox="0 0 360 90">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d36c25"/><stop offset="1" stop-color="#a24915"/></linearGradient>
+    <path id="m" d="M50 6 L58 24 L66 20 L62 44 L74 34 L77 42 L90 40 L85 54 L92 58 L70 72 L73 82 L52 78 L52 96 L48 96 L48 78 L27 82 L30 72 L8 58 L15 54 L10 40 L23 42 L26 34 L38 44 L34 20 L42 24 Z" stroke="rgba(40,20,10,.35)" stroke-width="3" stroke-linejoin="round"/>
+    <path id="o" d="M50 4 C78 26 80 66 50 96 C20 66 22 26 50 4 Z" stroke="rgba(40,20,10,.35)" stroke-width="3"/>
+  </defs>
+  <rect width="360" height="90" fill="url(#bg)"/>
+  <use href="#m" transform="translate(18 10) scale(0.36) rotate(-20 50 50)" fill="#f2c35c"/>
+  <use href="#o" transform="translate(66 42) scale(0.3) rotate(35 50 50)" fill="#8e2a1a"/>
+  <use href="#m" transform="translate(108 6) scale(0.38) rotate(15 50 50)" fill="#7a2116"/>
+  <use href="#o" transform="translate(150 44) scale(0.3) rotate(-40 50 50)" fill="#f2c35c"/>
+  <use href="#m" transform="translate(188 12) scale(0.34) rotate(50 50 50)" fill="#5a3317"/>
+  <use href="#m" transform="translate(236 42) scale(0.36) rotate(-10 50 50)" fill="#f6e3c0"/>
+  <use href="#o" transform="translate(282 8) scale(0.3) rotate(25 50 50)" fill="#6f7a2e"/>
+  <use href="#m" transform="translate(318 40) scale(0.34) rotate(-30 50 50)" fill="#a8321f"/>
+</svg>

@@ -595,6 +595,65 @@
     $("#year").textContent = state.today.slice(0, 4);
   }
 
+  /* ---------------- themes (classic / fall) ---------------- */
+
+  // The inline script in index.html applies the theme before first paint; this
+  // keeps it in sync once site.json has loaded and wires up the switcher.
+  const THEMES = ["classic", "fall"];
+  const THEME_COLOR = { classic: "#20448c", fall: "#22160f" };
+
+  function chosenTheme() {
+    const q = new URLSearchParams(location.search).get("theme");
+    if (THEMES.includes(q)) return q;
+    const saved = store.get("sagehall:theme");
+    return THEMES.includes(saved) ? saved : null;
+  }
+
+  function applyTheme(theme) {
+    const root = document.documentElement;
+    if (theme === "fall") root.setAttribute("data-theme", "fall");
+    else root.removeAttribute("data-theme");
+    for (const b of document.querySelectorAll("[data-theme-choice]")) b.setAttribute("aria-pressed", String(b.dataset.themeChoice === theme));
+    $('meta[name="theme-color"]')?.setAttribute("content", THEME_COLOR[theme]);
+    setFallingLeaves(theme === "fall");
+  }
+
+  function setFallingLeaves(on) {
+    const hero = $(".hero");
+    const existing = hero.querySelector(".leaf-fall");
+    if (!on) { existing?.remove(); return; }
+    if (existing || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const colors = ["#ee8b3a", "#c0392b", "#f4b544", "#a0522d", "#d9682b", "#8f9a3c"];
+    const box = h("div", { class: "leaf-fall", "aria-hidden": "true" });
+    for (let i = 0; i < 12; i++) {
+      const r = () => Math.random();
+      box.append(h("span", {
+        style: `--x:${(i * 8.3 + r() * 6).toFixed(1)}%;--s:${Math.round(14 + r() * 14)}px;--d:${(10 + r() * 8).toFixed(1)}s;` +
+               `--delay:${(-r() * 18).toFixed(1)}s;--sway:${Math.round(30 + r() * 60)}px;color:${colors[i % colors.length]}`,
+      }, icon(i % 3 ? "leaf-maple" : "leaf-oval")));
+    }
+    hero.prepend(box);
+  }
+
+  function initTheme() {
+    const fallback = THEMES.includes(state.site.theme) ? state.site.theme : "classic";
+    store.set("sagehall:default-theme", fallback); // lets the inline script avoid a flash next visit
+    applyTheme(chosenTheme() || fallback);
+
+    const sw = $("#theme-switch");
+    sw.hidden = state.site.theme_switcher === false;
+    for (const b of sw.querySelectorAll("[data-theme-choice]")) {
+      b.addEventListener("click", () => {
+        const t = b.dataset.themeChoice;
+        store.set("sagehall:theme", t);
+        const url = new URL(location.href);
+        url.searchParams.set("theme", t); // keep the address bar shareable
+        history.replaceState(null, "", url);
+        applyTheme(t);
+      });
+    }
+  }
+
   /* ---------------- boot ---------------- */
 
   async function init() {
@@ -604,6 +663,7 @@
 
     try { state.site = await getJSON("data/site.json"); }
     catch (err) { console.error("Couldn't load site settings", err); state.site = {}; }
+    initTheme();
 
     state.venues = (state.site.venues || []).filter((v) => v?.name).map((v) => ({
       name: String(v.name).trim(),
