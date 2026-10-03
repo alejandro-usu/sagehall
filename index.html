@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sage Hall · Country Swing Dancing in Logan, Utah</title>
+  <meta name="description" content="Country swing dancing in Cache Valley. See the Sage Hall dance schedule, venues, and what to expect on your first night.">
+  <meta property="og:title" content="Sage Hall · Country Swing Dancing">
+  <meta property="og:description" content="The Sage Hall dance schedule, venues, and reels from the floor.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#20448c">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=Sacramento&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="announce" id="announce" hidden>
+    <p class="wrap" id="announce-text"></p>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Sage Hall home">
+        <img src="assets/img/sage-hall-logo.png" alt="" width="46" height="46">
+        <span>Sage Hall</span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span class="menu-label">Menu</span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <a href="#schedule">Schedule</a>
+        <a href="#first-time">First time?</a>
+        <a href="#venues">Venues</a>
+        <a href="#reels">Reels</a>
+        <a href="#about">About</a>
+        <a class="nav-cta" data-instagram-link href="https://www.instagram.com/sage.hall.utah/" target="_blank" rel="noopener">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-instagram"/></svg>
+          <span>Instagram</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1 class="visually-hidden">Sage Hall</h1>
+          <img class="hero-logo" src="assets/img/sage-hall-logo.png" alt="Sage Hall" width="340" height="338">
+          <p class="script hero-script">Country Swing Dancing</p>
+          <p class="hero-lede">Cache Valley's biggest dance floor. Every night opens with a lesson, then the floor's yours. Come solo, bring a date, or bring the whole crew.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#schedule">See the schedule</a>
+            <a class="btn btn-ghost" href="#first-time">First time? Start here</a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <img class="hero-boot" src="assets/img/boot-bouquet.png" alt="" width="271" height="321">
+          <aside class="ticket" id="next-dance" aria-labelledby="next-dance-label" aria-live="polite">
+            <p class="ticket-kicker" id="next-dance-label">Next dance</p>
+            <div class="ticket-body">
+              <p class="ticket-loading">Loading the schedule…</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+      <div class="band" aria-hidden="true"></div>
+    </section>
+
+    <!-- ============ SCHEDULE ============ -->
+    <section class="schedule" id="schedule" aria-labelledby="month-name">
+      <div class="wrap">
+        <div class="sched-head">
+          <button class="month-nav" type="button" id="month-prev" aria-label="Previous month">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chev-left"/></svg>
+          </button>
+          <div class="month-title">
+            <h2 id="month-name">Schedule</h2>
+            <p class="script">Country Swing Dance Schedule</p>
+          </div>
+          <button class="month-nav" type="button" id="month-next" aria-label="Next month">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chev-right"/></svg>
+          </button>
+        </div>
+
+        <div class="sched-tools">
+          <div class="view-toggle" role="group" aria-label="Schedule view">
+            <button type="button" data-view="list" aria-pressed="true">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-list"/></svg> List
+            </button>
+            <button type="button" data-view="calendar" aria-pressed="false">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-grid"/></svg> Calendar
+            </button>
+          </div>
+          <ul class="legend" id="legend" aria-label="Venue colors"></ul>
+        </div>
+
+        <p class="notice" id="sched-notice" hidden></p>
+        <ol class="sched-list" id="sched-list"></ol>
+        <div class="cal" id="sched-cal" hidden></div>
+        <noscript><p class="notice">Turn on JavaScript to see the schedule, or check the latest flyer on Instagram.</p></noscript>
+
+        <div class="sched-foot">
+          <button class="btn btn-small btn-outline" type="button" id="ics-month" hidden>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-cal"/></svg>
+            <span>Add this month to my calendar</span>
+          </button>
+          <div class="subscribe" id="subscribe" hidden>
+            <span>Subscribe:</span>
+            <a id="sub-google" target="_blank" rel="noopener">Google Calendar</a>
+            <a id="sub-ical">Apple / Outlook</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FIRST TIME ============ -->
+    <section class="first-time" id="first-time" aria-labelledby="first-time-h">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="script">never danced before?</p>
+          <h2 id="first-time-h">First time at Sage Hall</h2>
+        </header>
+        <ol class="steps" id="first-time-list"></ol>
+        <div class="ft-bottom">
+          <div class="admission" id="admission" hidden>
+            <p class="admission-label">Admission</p>
+            <p class="admission-price" id="admission-price"></p>
+          </div>
+          <div class="faq" id="faq"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VENUES ============ -->
+    <section class="venues" id="venues" aria-labelledby="venues-h">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="script">where we dance</p>
+          <h2 id="venues-h">Venues</h2>
+        </header>
+        <div class="venue-grid" id="venue-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============ REELS ============ -->
+    <section class="reels" id="reels" aria-labelledby="reels-h">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="script">from the dance floor</p>
+          <h2 id="reels-h">Reels</h2>
+        </header>
+        <div class="reel-grid" id="reel-grid"></div>
+        <p class="reels-follow">
+          <a class="btn btn-light" data-instagram-link href="https://www.instagram.com/sage.hall.utah/" target="_blank" rel="noopener">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-instagram"/></svg>
+            <span data-instagram-handle>Follow @sage.hall.utah</span>
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about" aria-labelledby="about-h">
+      <div class="wrap about-grid">
+        <div class="about-copy">
+          <header class="section-head section-head-left">
+            <p class="script">named for the sagebrush</p>
+            <h2 id="about-h">About Sage Hall</h2>
+          </header>
+          <p>Sage Hall opened in 2021, started by USU alum Josh Lyman and longtime dance instructor Manuel Carias-Pineda. The goal was simple: be <em>the</em> place in Logan where people meet, dance, and make some of their best memories.</p>
+          <p>The name comes straight from the Aggie fight song, The Scotsman:</p>
+          <blockquote class="pull-quote">
+            <p>“Show me a true blooded Aggie from Utah, who doesn't love the spot where the sagebrush grows!”</p>
+          </blockquote>
+        </div>
+        <dl class="stats">
+          <div><dt>Opened</dt><dd>2021</dd></div>
+          <div><dt>Dancers a week</dt><dd>400–600</dd></div>
+          <div><dt>Dance floor</dt><dd>Biggest in Utah</dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="band band-footer" aria-hidden="true"></div>
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <img src="assets/img/sage-hall-logo.png" alt="Sage Hall" width="120" height="119">
+        <p>Country swing dancing in Logan, Utah.</p>
+      </div>
+      <div>
+        <h2 class="footer-h">Follow along</h2>
+        <ul class="footer-links">
+          <li><a data-instagram-link href="https://www.instagram.com/sage.hall.utah/" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-instagram"/></svg> Instagram</a></li>
+          <li><a id="facebook-link" href="https://www.facebook.com/sage.hall.utah/" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-facebook"/></svg> Facebook</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-h">Staff</h2>
+        <ul class="footer-links">
+          <li><a href="admin/"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-lock"/></svg> Staff sign-in</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="wrap footer-note">© <span id="year">2026</span> Sage Hall · Concept redesign mock-up, not the official site. Visit <a href="https://sagehalldance.com">sagehalldance.com</a> for official info.</p>
+  </footer>
+
+  <!-- Icon sprite -->
+  <svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8.5V6.8c0-.8.5-1.3 1.3-1.3H17V2.3h-2.6C11.6 2.3 10.5 4 10.5 6.6v1.9H8v3.2h2.5V22H14V11.7h2.6l.4-3.2z" fill="currentColor"/></symbol>
+    <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="3.5" cy="6" r="1.4" fill="currentColor"/><circle cx="3.5" cy="12" r="1.4" fill="currentColor"/><circle cx="3.5" cy="18" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M9 9v12M15 9v12M3 15h18" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 13v5M9.5 15.5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.6" fill="currentColor"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.1 6.6.5-5 4.4 1.5 6.5L12 16.6 6.3 20l1.5-6.5-5-4.4 6.6-.5z" fill="currentColor"/></symbol>
+  </svg>
+</body>
+</html>

@@ -1,0 +1,153 @@
+# Pages CMS configuration: https://pagescms.org/docs/configuration/
+# Staff sign in at https://app.pagescms.org (or via /admin on the site) and
+# edit these with plain forms. Every save commits to this repo and GitHub
+# Pages republishes the site within a minute or two.
+
+media:
+  input: assets/uploads
+  output: /assets/uploads
+
+content:
+  - name: events
+    label: Dance schedule
+    description: One row per dance night. Past nights can stay; the site greys them out automatically.
+    type: file
+    path: data/events.json
+    format: json
+    fields:
+      - name: events
+        label: Dance nights
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{start} · {venue}"
+        fields:
+          - name: start
+            label: Date & start time
+            type: date
+            required: true
+            options:
+              time: true
+          - name: venue
+            label: Venue
+            type: select
+            required: true
+            description: To add a new venue, add it under Site settings → Venues, then add it to this list in .pages.yml.
+            options:
+              values:
+                - Fairgrounds Event Center
+                - Mountain Valley Athletics
+                - Cache Bar
+          - name: title
+            label: Special title (optional)
+            type: string
+            description: Leave blank for a regular night. e.g. "Halloween Costume Dance"
+          - name: note
+            label: Note (optional)
+            type: string
+            description: Short extra info shown under the venue, e.g. "Beginner lesson 8:15"
+          - name: cancelled
+            label: Cancelled
+            type: boolean
+            description: Keeps the night on the calendar but marks it cancelled.
+
+  - name: settings
+    label: Site settings
+    type: file
+    path: data/site.json
+    format: json
+    fields:
+      - name: announcement
+        label: Announcement banner
+        type: string
+        description: Shown in a strip at the top of every page. Leave blank to hide it.
+      - name: instagram
+        label: Instagram handle
+        type: string
+        description: Without the @
+      - name: facebook
+        label: Facebook page URL
+        type: string
+      - name: admission
+        label: Admission
+        type: string
+        description: e.g. "$6 students · $7 general"
+      - name: reels
+        label: Instagram reels
+        type: string
+        description: Paste reel links (Share → Copy link in Instagram). The first three show on the home page.
+        list: true
+      - name: venues
+        label: Venues
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+            description: Must match the venue name used on the schedule exactly.
+          - name: address
+            label: Address
+            type: string
+            description: Used for directions links. Leave blank to search Maps by name.
+          - name: color
+            label: Calendar color
+            type: select
+            options:
+              values:
+                - denim
+                - sage
+                - copper
+                - rose
+                - gold
+          - name: ages21
+            label: 21+ only
+            type: boolean
+          - name: note
+            label: Short description
+            type: string
+      - name: first_time
+        label: First time here? cards
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Heading
+            type: string
+          - name: text
+            label: Text
+            type: text
+      - name: faq
+        label: FAQ
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{question}"
+        fields:
+          - name: question
+            label: Question
+            type: string
+          - name: answer
+            label: Answer
+            type: text
+      - name: google_calendar
+        label: Google Calendar (optional)
+        description: Fill both to pull the schedule straight from a public Google Calendar instead of the Dance schedule list. See README for setup.
+        type: object
+        fields:
+          - name: calendar_id
+            label: Calendar ID
+            type: string
+            description: Looks like abc123@group.calendar.google.com
+          - name: api_key
+            label: Browser API key
+            type: string

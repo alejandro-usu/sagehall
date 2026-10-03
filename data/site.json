@@ -1,0 +1,62 @@
+{
+  "announcement": "October schedule drops soon. Follow @sage.hall.utah for the flyer.",
+  "instagram": "sage.hall.utah",
+  "facebook": "https://www.facebook.com/sage.hall.utah/",
+  "admission": "$6 students · $7 general",
+  "reels": [],
+  "venues": [
+    {
+      "name": "Fairgrounds Event Center",
+      "address": "Cache County Fairgrounds, 450 S 500 W, Logan, UT 84321",
+      "color": "denim",
+      "ages21": false,
+      "note": "The home floor. Tuesday nights start with a lesson."
+    },
+    {
+      "name": "Mountain Valley Athletics",
+      "address": "",
+      "color": "sage",
+      "ages21": false,
+      "note": "Late-night Thursday and Saturday dances."
+    },
+    {
+      "name": "Cache Bar",
+      "address": "",
+      "color": "copper",
+      "ages21": true,
+      "note": "Wednesday dances. Bring your ID."
+    }
+  ],
+  "first_time": [
+    {
+      "title": "Come early for the lesson",
+      "text": "Most nights open with a quick lesson for beginners. On Tuesdays it runs 8:15–8:45, then open dancing until midnight."
+    },
+    {
+      "title": "No partner? No problem",
+      "text": "Come solo or bring the whole crew. Plenty of people show up on their own."
+    },
+    {
+      "title": "Wear something you can move in",
+      "text": "Boots are fun but not required. Pick shoes that turn easily on a wood floor."
+    }
+  ],
+  "faq": [
+    {
+      "question": "How much does it cost?",
+      "answer": "$6 for students and $7 general admission."
+    },
+    {
+      "question": "Do I need to know how to dance?",
+      "answer": "Nope. Show up for the lesson at the start of the night and you'll know enough to get on the floor."
+    },
+    {
+      "question": "Are all nights all-ages?",
+      "answer": "Nights at Cache Bar are 21+. Every other venue on the schedule is open to everyone."
+    }
+  ],
+  "google_calendar": {
+    "calendar_id": "",
+    "api_key": ""
+  }
+}
