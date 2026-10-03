@@ -10,9 +10,13 @@ A concept redesign for [Sage Hall](https://sagehalldance.com), the country swing
 - **Optional Google Calendar sync.** Paste a calendar ID and the site reads the schedule live from Google Calendar instead.
 - **Instagram reels**: paste up to three reel links and they embed on the page.
 - First-timer guide, FAQ, venues, and an about section.
-- **Two looks:** *Classic* (cream and denim, from the September flyer) and *Fall* (barn wood, pumpkins and autumn leaves, from the October flyer). Both share the same schedule and content.
+- **Four seasonal looks** that share the same schedule and content:
+  - *Spring*: blossom branches, a jar of tulips, gingham and drifting petals.
+  - *Summer*: cream and denim, from the September flyer.
+  - *Fall*: barn wood, pumpkins and autumn leaves, from the October flyer.
+  - *Winter*: a snowy night, pine boughs, buffalo plaid and falling snow.
 
-The western pattern band and boot bouquet are cut from Sage Hall's September flyer. The fall wood texture, pumpkin, leaves and garland were drawn for this site.
+The western pattern band and boot bouquet are cut from Sage Hall's September flyer. The other seasonal artwork (wood texture, pumpkin, leaves, garlands, pine, tulips, snowy hills) was drawn for this site.
 
 ---
 
@@ -55,16 +59,16 @@ If staff would rather use the Google Calendar app on their phones:
 
 The site then reads events from Google Calendar and shows "Subscribe" links under the schedule. Put the venue name, or its address, in each event's **location**. Start a title with "Cancelled" to mark a night as cancelled. If Google can't be reached, the site falls back to `data/events.json`.
 
-## 4. Themes: Classic and Fall
+## 4. Seasonal themes
 
-Both looks are the same page with different styling, so they always show the same schedule and settings. There's nothing extra to host.
+All four looks are the same page with different styling, so they always show the same schedule and settings. There's nothing extra to host.
 
-- **Links to share:** add `?theme=classic` or `?theme=fall` to the site address, e.g. `https://alejandro-usu.github.io/sagehall/?theme=fall`.
-- **Switch in the corner:** a Classic / Fall toggle floats in the bottom-right corner. It remembers the visitor's pick.
-- **Default look:** **Site settings → Site theme** sets what first-time visitors see, so the site can go fall in October and back to classic later.
+- **Links to share:** add `?theme=spring`, `?theme=summer`, `?theme=fall` or `?theme=winter` to the site address, e.g. `https://alejandro-usu.github.io/sagehall/?theme=winter`. Older `?theme=classic` links still work and open Summer.
+- **Switch in the corner:** a Spring / Summer / Fall / Winter toggle floats in the bottom-right corner (icons only on phones). It remembers the visitor's pick.
+- **Default look:** **Site settings → Site theme** sets what first-time visitors see, so staff can change it with the seasons.
 - **Hide the switch** when the site goes live with **Site settings → Show theme switcher**.
 
-The fall styles live in `assets/css/theme-fall.css`. Everything in it is scoped to `<html data-theme="fall">`.
+Summer is the base stylesheet (`assets/css/styles.css`). Each other season is a small file on top of it (`theme-spring.css`, `theme-fall.css`, `theme-winter.css`), scoped to `<html data-theme="...">`. Venue colors stay the same in every season, so Cache Bar is always the same color.
 
 ## 5. Instagram reels
 
@@ -95,8 +99,8 @@ Some details came from older public listings and should be confirmed:
 | `data/site.json` | Announcement, social links, venues, reels, FAQ, Google Calendar settings |
 | `.pages.yml` | Pages CMS form definitions |
 | `assets/js/main.js` | Schedule, calendar export, Google Calendar sync, reels |
-| `assets/css/styles.css` | Styles (classic look) |
-| `assets/css/theme-fall.css` | Fall look, applied on top of the classic styles |
-| `assets/img/` | Logos (regular and light-on-dark), boot art, pattern band, fall artwork, favicon |
+| `assets/css/styles.css` | Styles (the Summer look) |
+| `assets/css/theme-spring.css`, `theme-fall.css`, `theme-winter.css` | The other seasonal looks, applied on top of the Summer styles |
+| `assets/img/` | Logos (regular and light-on-dark), seasonal artwork, pattern band, favicon |
 
 All times are Cache Valley local time (America/Denver).

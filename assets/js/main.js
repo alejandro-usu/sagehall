@@ -595,48 +595,61 @@
     $("#year").textContent = state.today.slice(0, 4);
   }
 
-  /* ---------------- themes (classic / fall) ---------------- */
+  /* ---------------- themes (spring / summer / fall / winter) ---------------- */
 
   // The inline script in index.html applies the theme before first paint; this
   // keeps it in sync once site.json has loaded and wires up the switcher.
-  const THEMES = ["classic", "fall"];
-  const THEME_COLOR = { classic: "#20448c", fall: "#22160f" };
+  // "classic" was the summer theme's old name, so old links and saved picks still work.
+  const THEMES = ["spring", "summer", "fall", "winter"];
+  const themeName = (t) => (t === "classic" ? "summer" : THEMES.includes(t) ? t : null);
+  const THEME_COLOR = { spring: "#2f6b4f", summer: "#20448c", fall: "#22160f", winter: "#0f1c2e" };
+
+  // Drifting particles per season: leaves in fall, snow in winter, petals in spring.
+  const PARTICLES = {
+    fall: { count: 12, icons: ["leaf-maple", "leaf-maple", "leaf-oval"], size: [14, 28], dur: [10, 18], sway: [30, 90],
+            colors: ["#ee8b3a", "#c0392b", "#f4b544", "#a0522d", "#d9682b", "#8f9a3c"] },
+    winter: { count: 30, icons: ["dot", "dot", "dot", "snowflake"], size: [4, 12], dur: [9, 17], sway: [15, 50],
+              colors: ["#ffffff", "#e8f2fb", "#d6e8f7"] },
+    spring: { count: 16, icons: ["petal"], size: [10, 17], dur: [10, 17], sway: [40, 110],
+              colors: ["#f6b7c9", "#f3a0b8", "#fbd3df", "#ffffff", "#f8c6d4"] },
+  };
 
   function chosenTheme() {
-    const q = new URLSearchParams(location.search).get("theme");
-    if (THEMES.includes(q)) return q;
-    const saved = store.get("sagehall:theme");
-    return THEMES.includes(saved) ? saved : null;
+    const fromUrl = themeName(new URLSearchParams(location.search).get("theme"));
+    return fromUrl || themeName(store.get("sagehall:theme"));
   }
 
   function applyTheme(theme) {
-    const root = document.documentElement;
-    if (theme === "fall") root.setAttribute("data-theme", "fall");
-    else root.removeAttribute("data-theme");
+    document.documentElement.setAttribute("data-theme", theme);
     for (const b of document.querySelectorAll("[data-theme-choice]")) b.setAttribute("aria-pressed", String(b.dataset.themeChoice === theme));
     $('meta[name="theme-color"]')?.setAttribute("content", THEME_COLOR[theme]);
-    setFallingLeaves(theme === "fall");
+    setParticles(theme);
   }
 
-  function setFallingLeaves(on) {
+  function setParticles(theme) {
     const hero = $(".hero");
-    const existing = hero.querySelector(".leaf-fall");
-    if (!on) { existing?.remove(); return; }
-    if (existing || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const colors = ["#ee8b3a", "#c0392b", "#f4b544", "#a0522d", "#d9682b", "#8f9a3c"];
-    const box = h("div", { class: "leaf-fall", "aria-hidden": "true" });
-    for (let i = 0; i < 12; i++) {
-      const r = () => Math.random();
+    const existing = hero.querySelector(".particles");
+    if (existing?.dataset.theme === theme) return;
+    existing?.remove();
+    const cfg = PARTICLES[theme];
+    if (!cfg || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const between = ([a, b]) => a + Math.random() * (b - a);
+    const box = h("div", { class: "particles", "aria-hidden": "true", "data-theme": theme });
+    for (let i = 0; i < cfg.count; i++) {
+      const kind = cfg.icons[i % cfg.icons.length];
+      const size = kind === "snowflake" ? between([10, 16]) : between(cfg.size);
       box.append(h("span", {
-        style: `--x:${(i * 8.3 + r() * 6).toFixed(1)}%;--s:${Math.round(14 + r() * 14)}px;--d:${(10 + r() * 8).toFixed(1)}s;` +
-               `--delay:${(-r() * 18).toFixed(1)}s;--sway:${Math.round(30 + r() * 60)}px;color:${colors[i % colors.length]}`,
-      }, icon(i % 3 ? "leaf-maple" : "leaf-oval")));
+        class: kind === "dot" ? "dot" : null,
+        style: `--x:${((i + Math.random()) * (100 / cfg.count)).toFixed(1)}%;--s:${size.toFixed(0)}px;` +
+               `--d:${between(cfg.dur).toFixed(1)}s;--delay:${(-Math.random() * cfg.dur[1]).toFixed(1)}s;` +
+               `--sway:${between(cfg.sway).toFixed(0)}px;color:${cfg.colors[i % cfg.colors.length]}`,
+      }, kind === "dot" ? null : icon(kind)));
     }
     hero.prepend(box);
   }
 
   function initTheme() {
-    const fallback = THEMES.includes(state.site.theme) ? state.site.theme : "classic";
+    const fallback = themeName(state.site.theme) || "summer";
     store.set("sagehall:default-theme", fallback); // lets the inline script avoid a flash next visit
     applyTheme(chosenTheme() || fallback);
 

@@ -18,13 +18,16 @@
        Order: ?theme= in the URL, then the visitor's last pick, then the site default
        (cached from data/site.json). main.js takes over once the page loads. */
     (function () {
-      var ok = { classic: 1, fall: 1 }, q = new URLSearchParams(location.search).get("theme"), t = ok[q] ? q : null;
-      try { t = t || localStorage.getItem("sagehall:theme") || localStorage.getItem("sagehall:default-theme"); } catch (e) {}
-      if (t === "fall") document.documentElement.setAttribute("data-theme", "fall");
+      var names = { spring: "spring", summer: "summer", fall: "fall", winter: "winter", classic: "summer" };
+      var t = names[new URLSearchParams(location.search).get("theme")];
+      try { t = t || names[localStorage.getItem("sagehall:theme")] || names[localStorage.getItem("sagehall:default-theme")]; } catch (e) {}
+      document.documentElement.setAttribute("data-theme", t || "summer");
     })();
   </script>
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/theme-spring.css">
   <link rel="stylesheet" href="assets/css/theme-fall.css">
+  <link rel="stylesheet" href="assets/css/theme-winter.css">
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -38,7 +41,7 @@
     <div class="wrap header-inner">
       <a class="brand" href="#top" aria-label="Sage Hall home">
         <img class="logo-dark" src="assets/img/sage-hall-logo.png" alt="" width="46" height="46">
-        <img class="logo-light" src="assets/img/sage-hall-logo-light.png" alt="" width="46" height="46">
+        <img class="logo-light" src="assets/img/sage-hall-logo-light.png" alt="" width="46" height="46" loading="lazy">
         <span>Sage Hall</span>
       </a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -66,7 +69,7 @@
         <div class="hero-copy">
           <h1 class="visually-hidden">Sage Hall</h1>
           <img class="hero-logo logo-dark" src="assets/img/sage-hall-logo.png" alt="Sage Hall" width="340" height="331">
-          <img class="hero-logo logo-light" src="assets/img/sage-hall-logo-light.png" alt="Sage Hall" width="340" height="331">
+          <img class="hero-logo logo-light" src="assets/img/sage-hall-logo-light.png" alt="Sage Hall" width="340" height="331" loading="lazy">
           <p class="script hero-script">Country Swing Dancing</p>
           <p class="hero-lede">Dance nights several times a week around Logan. Come solo, bring a date, or bring the whole crew.</p>
           <div class="hero-cta">
@@ -77,7 +80,9 @@
 
         <div class="hero-side">
           <img class="hero-boot" src="assets/img/boot-bouquet.png" alt="" width="271" height="321">
-          <img class="hero-pumpkin" src="assets/img/pumpkin.svg" alt="" width="160" height="150">
+          <img class="hero-sticker sticker-spring" src="assets/img/tulips.svg" alt="" width="160" height="160" loading="lazy">
+          <img class="hero-sticker sticker-fall" src="assets/img/pumpkin.svg" alt="" width="160" height="150" loading="lazy">
+          <img class="hero-sticker sticker-winter" src="assets/img/pine.svg" alt="" width="160" height="170" loading="lazy">
           <aside class="ticket" id="next-dance" aria-labelledby="next-dance-label" aria-live="polite">
             <p class="ticket-kicker" id="next-dance-label">Next dance</p>
             <div class="ticket-body">
@@ -228,11 +233,19 @@
     <p class="wrap footer-note">© <span id="year">2026</span> Sage Hall · Concept redesign mock-up, not the official site. Visit <a href="https://sagehalldance.com">sagehalldance.com</a> for official info.</p>
   </footer>
 
-  <!-- Classic / Fall switch (shown when Site settings → "Show theme switcher" is on) -->
+  <!-- Season switch (shown when Site settings → "Show theme switcher" is on) -->
   <div class="theme-switch" id="theme-switch" role="group" aria-label="Site theme" hidden>
-    <button type="button" data-theme-choice="classic" aria-pressed="true">Classic</button>
-    <button type="button" data-theme-choice="fall" aria-pressed="false">
-      <svg aria-hidden="true" viewBox="0 0 100 100"><use href="#i-leaf-maple"/></svg> Fall
+    <button type="button" data-theme-choice="spring" aria-pressed="false" aria-label="Spring">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-blossom"/></svg><span class="ts-label">Spring</span>
+    </button>
+    <button type="button" data-theme-choice="summer" aria-pressed="true" aria-label="Summer">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-sun"/></svg><span class="ts-label">Summer</span>
+    </button>
+    <button type="button" data-theme-choice="fall" aria-pressed="false" aria-label="Fall">
+      <svg aria-hidden="true" viewBox="0 0 100 100"><use href="#i-leaf-maple"/></svg><span class="ts-label">Fall</span>
+    </button>
+    <button type="button" data-theme-choice="winter" aria-pressed="false" aria-label="Winter">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-snowflake"/></svg><span class="ts-label">Winter</span>
     </button>
   </div>
 
@@ -250,6 +263,10 @@
     <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></symbol>
     <symbol id="i-leaf-maple" viewBox="0 0 100 100"><path d="M50 6 L58 24 L66 20 L62 44 L74 34 L77 42 L90 40 L85 54 L92 58 L70 72 L73 82 L52 78 L52 96 L48 96 L48 78 L27 82 L30 72 L8 58 L15 54 L10 40 L23 42 L26 34 L38 44 L34 20 L42 24 Z" fill="currentColor"/></symbol>
     <symbol id="i-leaf-oval" viewBox="0 0 100 100"><path d="M50 4 C78 26 80 66 50 96 C20 66 22 26 50 4 Z" fill="currentColor"/><path d="M50 12 L50 90" stroke="rgb(0 0 0 / 0.25)" stroke-width="3"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.6" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></g></symbol>
+    <symbol id="i-snowflake" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 2.5v19M3.8 7.25l16.4 9.5M3.8 16.75l16.4-9.5"/><path d="M9.5 4.2 12 6.5l2.5-2.3M9.5 19.8 12 17.5l2.5 2.3M4.4 10.4l3.3-.9-1-3.2M19.6 13.6l-3.3.9 1 3.2M4.4 13.6l3.3.9-1 3.2M19.6 10.4l-3.3-.9 1-3.2"/></g></symbol>
+    <symbol id="i-blossom" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="12" cy="6.4" r="3.9"/><circle cx="17.3" cy="10.3" r="3.9"/><circle cx="15.3" cy="16.6" r="3.9"/><circle cx="8.7" cy="16.6" r="3.9"/><circle cx="6.7" cy="10.3" r="3.9"/></g><circle cx="12" cy="12" r="2.6" fill="#f6d36b"/></symbol>
+    <symbol id="i-petal" viewBox="0 0 100 100"><path d="M50 20 C44 8 30 6 26 16 C18 40 30 74 50 94 C70 74 82 40 74 16 C70 6 56 8 50 20 Z" fill="currentColor"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.1 6.6.5-5 4.4 1.5 6.5L12 16.6 6.3 20l1.5-6.5-5-4.4 6.6-.5z" fill="currentColor"/></symbol>
   </svg>
 </body>

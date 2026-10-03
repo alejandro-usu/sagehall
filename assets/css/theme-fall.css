@@ -16,8 +16,8 @@
   --line: #e2cdb0;
   --primary: #b4531c;
   --primary-dark: #8f3f12;
-  --copper: #a8521f;
-  --copper-light: #f0a35a;
+  --accent: #a8521f;
+  --accent-light: #f0a35a;
   --night: #24170f;
 
   --pumpkin: #ee8b3a;
@@ -31,6 +31,7 @@
 /* Dark wood areas get lighter venue colours so dots and chips stay visible. */
 :root[data-theme="fall"] :is(.schedule, .reels) {
   --denim: #93b2ee; --sage: #a9c48f; --copper: #f2a265; --gold: #f4c55e; --rose: #f2a0b4;
+  --accent: #f2a265;
 }
 
 /* ---------- swaps ---------- */
@@ -71,36 +72,10 @@
 :root[data-theme="fall"] .hero .btn-ghost { border-color: var(--on-wood); color: var(--on-wood); }
 :root[data-theme="fall"] .hero .btn-ghost:hover { background: var(--on-wood); color: #2a170c; }
 
-:root[data-theme="fall"] .hero-pumpkin {
-  display: block; position: absolute; z-index: 2; width: 150px; right: -28px; top: -100px;
-  transform: rotate(6deg); filter: drop-shadow(0 8px 12px rgb(0 0 0 / 0.4)); pointer-events: none;
-}
-@media (max-width: 880px) {
-  :root[data-theme="fall"] .hero-pumpkin { width: 112px; right: -6px; top: -16px; }
-}
-@media (max-width: 480px) {
-  :root[data-theme="fall"] .hero-pumpkin { width: 94px; top: -2px; right: -2px; }
-}
+:root[data-theme="fall"] .sticker-fall { display: block; }
 /* ticket notches show the dark wood behind the ticket */
 :root[data-theme="fall"] .ticket-stub::before,
 :root[data-theme="fall"] .ticket-stub::after { background: #2a1c14; border-color: rgb(255 255 255 / 0.12); }
-
-/* falling leaves (added by main.js; hidden for reduced motion) */
-.leaf-fall { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.leaf-fall span {
-  position: absolute; top: -40px; left: var(--x); width: var(--s); height: var(--s);
-  animation: leaf-fall var(--d) linear var(--delay) infinite;
-}
-.leaf-fall svg { width: 100%; height: 100%; animation: leaf-spin calc(var(--d) / 3) ease-in-out var(--delay) infinite alternate; }
-@keyframes leaf-fall {
-  0% { transform: translate3d(0, 0, 0); opacity: 0; }
-  8% { opacity: 0.85; }
-  50% { transform: translate3d(var(--sway), 55vh, 0); }
-  88% { opacity: 0.85; }
-  100% { transform: translate3d(calc(var(--sway) * -0.3), 110vh, 0); opacity: 0; }
-}
-@keyframes leaf-spin { from { transform: rotate(-35deg); } to { transform: rotate(55deg); } }
-@media (prefers-reduced-motion: reduce) { .leaf-fall { display: none; } }
 
 /* ---------- leaf band ---------- */
 :root[data-theme="fall"] .band {
@@ -163,4 +138,3 @@
 
 /* ---------- theme switch on the fall look ---------- */
 :root[data-theme="fall"] .theme-switch button[aria-pressed="true"] { background: var(--pumpkin); color: #2a170c; }
-:root[data-theme="fall"] .theme-switch svg { color: currentColor; }

@@ -31,6 +31,9 @@
      themes can change it without recolouring a venue. */
   --primary: var(--denim);
   --primary-dark: var(--denim-dark);
+  /* Secondary accent (script headings, start times). Also separate from the venue colours. */
+  --accent: var(--copper);
+  --accent-light: var(--copper-light);
 
   --radius: 14px;
   --radius-sm: 8px;
@@ -82,7 +85,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 }
 .skip-link:focus { top: 12px; color: #fff; }
 
-.script { font-family: var(--font-script); font-weight: 400; color: var(--copper); line-height: 1; }
+.script { font-family: var(--font-script); font-weight: 400; color: var(--accent); line-height: 1; }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -227,7 +230,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .ticket-date { font-family: var(--font-cond); line-height: 0.9; margin: 0; }
 .ticket-date .dow { display: block; font-weight: 600; font-size: 1.15rem; letter-spacing: 0.14em; color: var(--primary); }
 .ticket-date .md { display: block; font-weight: 700; font-size: clamp(2.6rem, 5vw, 3.3rem); text-transform: uppercase; }
-.ticket-time { margin: 0; font: 700 clamp(1.8rem, 3.4vw, 2.2rem)/1 var(--font-cond); color: var(--copper); white-space: nowrap; }
+.ticket-time { margin: 0; font: 700 clamp(1.8rem, 3.4vw, 2.2rem)/1 var(--font-cond); color: var(--accent); white-space: nowrap; }
 .ticket-venue { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0 0 0.35rem; font: 600 1.35rem/1.2 var(--font-cond); }
 .ticket-title { margin: 0 0 0.3rem; font: 700 1.05rem/1.3 var(--font-body); color: var(--rose); }
 .ticket-note { margin: 0 0 0.5rem; color: var(--ink-soft); font-size: 1rem; }
@@ -247,7 +250,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .ticket-more ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; }
 .ticket-more li { display: flex; align-items: center; gap: 0.5rem; font: 500 1.08rem/1.3 var(--font-cond); }
 .ticket-more li .when { min-width: 6.6rem; font-weight: 600; }
-.ticket-more li .t { margin-left: auto; color: var(--copper); font-weight: 600; }
+.ticket-more li .t { margin-left: auto; color: var(--accent); font-weight: 600; }
 .ticket-empty h3 { font: 700 1.9rem/1.05 var(--font-cond); text-transform: uppercase; margin-bottom: 0.5rem; }
 .ticket-empty p { color: var(--ink-soft); }
 
@@ -353,7 +356,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .legend li { display: inline-flex; align-items: center; gap: 0.45rem; }
 
 .notice {
-  background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--copper);
+  background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent);
   border-radius: var(--radius-sm); padding: 0.9rem 1.1rem; color: var(--ink-soft); margin: 0 0 1rem;
 }
 .notice a { font-weight: 600; }
@@ -373,7 +376,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .sched-row .d-venue { display: flex; align-items: center; flex-wrap: wrap; gap: 0.35rem 0.6rem; font-size: 1.45rem; font-weight: 500; line-height: 1.15; }
 .sched-row .d-sub { font: 500 0.98rem/1.35 var(--font-body); color: var(--ink-soft); margin-top: 0.15rem; }
 .sched-row .v-name.is-special { color: var(--rose); font-weight: 600; }
-.sched-row .d-time { font-size: 1.55rem; font-weight: 600; color: var(--copper); white-space: nowrap; }
+.sched-row .d-time { font-size: 1.55rem; font-weight: 600; color: var(--accent); white-space: nowrap; }
 .sched-row.is-past { color: var(--muted); }
 .sched-row.is-past .d-dow, .sched-row.is-past .d-time { color: var(--muted); }
 .sched-row.is-past .dot { opacity: 0.5; }
@@ -443,7 +446,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .ft-bottom { display: grid; grid-template-columns: minmax(220px, 0.6fr) 1.4fr; gap: 1.25rem; margin-top: 1.25rem; align-items: start; }
 .ft-bottom.no-admission { grid-template-columns: 1fr; }
 .admission { padding: 1.5rem; border-radius: var(--radius); background: var(--ink); color: var(--paper); text-align: center; }
-.admission-label { margin: 0 0 0.3rem; font: 600 0.95rem/1 var(--font-cond); letter-spacing: 0.2em; text-transform: uppercase; color: var(--copper-light); }
+.admission-label { margin: 0 0 0.3rem; font: 600 0.95rem/1 var(--font-cond); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-light); }
 .admission-price { margin: 0; font: 700 1.7rem/1.2 var(--font-cond); text-wrap: balance; }
 .faq { display: grid; gap: 0.6rem; }
 .faq details { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-sm); }
@@ -475,7 +478,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 /* ---------- reels ---------- */
 .reels { padding-block: var(--section-pad); background: var(--night); color: var(--paper); }
 .reels .section-head h2 { color: var(--paper); }
-.reels .section-head .script { color: var(--copper-light); }
+.reels .section-head .script { color: var(--accent-light); }
 .reel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; align-items: start; justify-items: center; }
 .reel { width: 100%; max-width: 380px; }
 .reel .instagram-media {
@@ -518,7 +521,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .about { padding-block: var(--section-pad); }
 .about-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
 .about-copy p { font-size: 1.12rem; color: var(--ink-soft); max-width: 60ch; }
-.pull-quote { margin: 1.5rem 0 0; padding: 1.25rem 1.5rem; border-left: 4px solid var(--copper); background: var(--card); border-radius: 0 var(--radius) var(--radius) 0; }
+.pull-quote { margin: 1.5rem 0 0; padding: 1.25rem 1.5rem; border-left: 4px solid var(--accent); background: var(--card); border-radius: 0 var(--radius) var(--radius) 0; }
 .pull-quote p { margin: 0; font: 600 1.45rem/1.3 var(--font-cond); color: var(--ink); }
 .stats { margin: 0; display: grid; gap: 1rem; }
 .stats div { padding: 1.2rem 1.4rem; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); }
@@ -562,10 +565,36 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 }
 
 /* ==========================================================================
-   Theme plumbing. The fall look lives in theme-fall.css; these defaults keep
-   its extra artwork hidden in the classic theme.
+   Theme plumbing. Summer is this file; theme-spring/fall/winter.css layer on
+   top. These defaults keep the other seasons' artwork hidden in summer.
    ========================================================================== */
-.logo-light, .hero-pumpkin { display: none; }
+.logo-light, .hero-sticker { display: none; }
+
+/* Seasonal sticker on the ticket's corner (each theme file shows its own). */
+.hero-sticker {
+  position: absolute; z-index: 2; width: 150px; right: -28px; top: -100px;
+  transform: rotate(6deg); filter: drop-shadow(0 8px 12px rgb(0 0 0 / 0.35)); pointer-events: none;
+}
+@media (max-width: 880px) { .hero-sticker { width: 112px; right: -6px; top: -16px; } }
+@media (max-width: 480px) { .hero-sticker { width: 94px; top: -2px; right: -2px; } }
+
+/* Drifting leaves / snow / petals in the hero (added by main.js). */
+.particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.particles span {
+  position: absolute; top: -40px; left: var(--x); width: var(--s); height: var(--s);
+  animation: particle-fall var(--d) linear var(--delay) infinite;
+}
+.particles svg { width: 100%; height: 100%; animation: particle-spin calc(var(--d) / 3) ease-in-out var(--delay) infinite alternate; }
+.particles .dot { border-radius: 50%; background: radial-gradient(circle, #fff 0 35%, rgb(255 255 255 / 0) 70%); }
+@keyframes particle-fall {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: var(--o, 0.85); }
+  50% { transform: translate3d(var(--sway), 55vh, 0); }
+  88% { opacity: var(--o, 0.85); }
+  100% { transform: translate3d(calc(var(--sway) * -0.3), 110vh, 0); opacity: 0; }
+}
+@keyframes particle-spin { from { transform: rotate(-35deg); } to { transform: rotate(55deg); } }
+@media (prefers-reduced-motion: reduce) { .particles { display: none; } }
 
 .theme-switch {
   position: fixed; z-index: 60;
@@ -582,4 +611,14 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 }
 .theme-switch button:hover { background: rgb(255 255 255 / 0.1); }
 .theme-switch button[aria-pressed="true"] { background: #f6efe4; color: #2a211c; }
-.theme-switch svg { width: 1em; height: 1em; color: #e8873a; }
+.theme-switch svg { width: 1.05em; height: 1.05em; }
+@media (max-width: 560px) {
+  /* icons only on phones; each button keeps its aria-label */
+  .theme-switch button { padding: 0 0.8rem; }
+  .theme-switch .ts-label { display: none; }
+}
+.theme-switch [data-theme-choice="spring"] svg { color: #f0a3bb; }
+.theme-switch [data-theme-choice="summer"] svg { color: #f2b13a; }
+.theme-switch [data-theme-choice="fall"] svg { color: #ee8b3a; }
+.theme-switch [data-theme-choice="winter"] svg { color: #a9d1f0; }
+.theme-switch button[aria-pressed="true"] svg { color: currentColor; }

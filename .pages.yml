@@ -87,15 +87,17 @@ content:
       - name: theme
         label: Site theme
         type: select
-        description: The look visitors see by default.
+        description: The seasonal look visitors see by default.
         options:
           values:
-            - { value: "classic", label: "Classic" }
+            - { value: "spring", label: "Spring" }
+            - { value: "summer", label: "Summer" }
             - { value: "fall", label: "Fall" }
+            - { value: "winter", label: "Winter" }
       - name: theme_switcher
         label: Show theme switcher
         type: boolean
-        description: Shows a Classic / Fall toggle in the corner of the site. Handy for demos; turn it off when the site goes live.
+        description: Shows a Spring / Summer / Fall / Winter toggle in the corner of the site. Handy for demos; turn it off when the site goes live.
       - name: instagram
         label: Instagram handle
         type: string

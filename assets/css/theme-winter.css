@@ -1,0 +1,145 @@
+/* ==========================================================================
+   Winter theme: a snowy night, pine boughs, buffalo plaid and falling snow.
+   Scoped to <html data-theme="winter"> (see index.html and main.js).
+   ========================================================================== */
+
+:root[data-theme="winter"] {
+  --paper: #f2f6f9;
+  --paper-2: #e3ebf2;
+  --paper-3: #d2dfea;
+  --card: #ffffff;
+  --ink: #1b2533;
+  --ink-soft: #46546a;
+  --muted: #6b7789;
+  --line: #d3dde7;
+  --primary: #a8323a;
+  --primary-dark: #85242b;
+  --accent: #2d6150;
+  --accent-light: #9fd1bd;
+  --night: #13243a;
+
+  --navy: #13243a;
+  --navy-deep: #0d1a2b;
+  --ice: #cfe6f7;
+  --frost: #eef5fb;
+  --heading: #1d3557;
+  --snow-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cpath d='M30.0 25.0L30.0 43.0M37.8 29.5L22.2 38.5M37.8 38.5L22.2 29.5M122.0 52.0L122.0 64.0M127.2 55.0L116.8 61.0M127.2 61.0L116.8 55.0M70.0 113.0L70.0 127.0M76.1 116.5L63.9 123.5M76.1 123.5L63.9 116.5M154.0 136.0L154.0 156.0M162.7 141.0L145.3 151.0M162.7 151.0L145.3 141.0' stroke='white' stroke-opacity='0.09' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3Cg fill='white' fill-opacity='0.08'%3E%3Ccircle cx='96' cy='16' r='2'/%3E%3Ccircle cx='16' cy='98' r='1.6'/%3E%3Ccircle cx='150' cy='96' r='1.8'/%3E%3Ccircle cx='110' cy='166' r='1.5'/%3E%3Ccircle cx='48' cy='70' r='1.4'/%3E%3C/g%3E%3C/svg%3E");
+}
+:root[data-theme="winter"] :is(.schedule, .reels) {
+  --denim: #93b2ee; --sage: #a9c48f; --copper: #f2a265; --gold: #f4c55e; --rose: #f2a0b4;
+  --accent: #f2a265;
+}
+
+/* ---------- swaps ---------- */
+:root[data-theme="winter"] .logo-dark,
+:root[data-theme="winter"] .hero-boot { display: none; }
+:root[data-theme="winter"] .logo-light,
+:root[data-theme="winter"] .sticker-winter { display: block; }
+
+/* ---------- header ---------- */
+:root[data-theme="winter"] .site-header { background: rgb(13 26 43 / 0.93); border-bottom-color: rgb(255 255 255 / 0.08); }
+:root[data-theme="winter"] .brand,
+:root[data-theme="winter"] .site-nav a { color: var(--frost); }
+:root[data-theme="winter"] .site-nav a:hover { background: rgb(255 255 255 / 0.08); color: var(--ice); }
+:root[data-theme="winter"] .site-nav .nav-cta { background: var(--ice); color: var(--navy); }
+:root[data-theme="winter"] .site-nav .nav-cta:hover { background: #ffffff; color: var(--navy); }
+:root[data-theme="winter"] .menu-btn { border-color: var(--frost); color: var(--frost); }
+@media (max-width: 880px) {
+  :root[data-theme="winter"] .site-nav { background: var(--navy-deep); border-bottom-color: rgb(255 255 255 / 0.08); }
+  :root[data-theme="winter"] .site-nav a { border-bottom-color: rgb(255 255 255 / 0.12); }
+}
+
+/* ---------- hero: snowy night ---------- */
+:root[data-theme="winter"] .hero {
+  background:
+    url("../img/winter-hills.svg") no-repeat center bottom / 1440px auto,
+    radial-gradient(1.5px 1.5px at 12% 18%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 34% 9%, #fff, transparent),
+    radial-gradient(1px 1px at 58% 22%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 76% 12%, #fff, transparent),
+    radial-gradient(1px 1px at 90% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 46% 40%, #fff, transparent),
+    radial-gradient(90% 60% at 50% 0%, #2c4d74 0%, transparent 70%),
+    linear-gradient(#0d1a2b, #1d3a57 80%);
+}
+:root[data-theme="winter"] .hero-grid { padding-bottom: clamp(110px, 12vw, 150px); }
+:root[data-theme="winter"] .hero::before {
+  inset: 0 auto auto 0; width: clamp(130px, 22vw, 300px); aspect-ratio: 300 / 220; opacity: 1;
+  background: url("../img/winter-corner.svg") no-repeat 0 0 / contain;
+  -webkit-mask-image: none; mask-image: none;
+  filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.35));
+}
+:root[data-theme="winter"] .hero-script { color: var(--frost); }
+:root[data-theme="winter"] .hero-lede { color: #c9d6e4; }
+:root[data-theme="winter"] .hero .btn-ghost { border-color: var(--frost); color: var(--frost); }
+:root[data-theme="winter"] .hero .btn-ghost:hover { background: var(--frost); color: var(--navy); }
+:root[data-theme="winter"] .ticket-stub::before,
+:root[data-theme="winter"] .ticket-stub::after { background: #16304b; border-color: rgb(255 255 255 / 0.12); }
+
+/* ---------- buffalo plaid band with a snowy edge ---------- */
+:root[data-theme="winter"] .band {
+  position: relative; height: 84px; border-top: 0;
+  background-color: #b3262f;
+  background-image: linear-gradient(90deg, rgb(18 8 8 / 0.55) 50%, transparent 50%), linear-gradient(rgb(18 8 8 / 0.55) 50%, transparent 50%);
+  background-size: 56px 56px;
+}
+:root[data-theme="winter"] .band::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 14px;
+  background: radial-gradient(circle at 12px 0, #ffffff 11px, transparent 11.5px) repeat-x 0 0 / 24px 14px;
+}
+@media (max-width: 640px) { :root[data-theme="winter"] .band { height: 64px; } }
+
+/* ---------- schedule: night panel ---------- */
+:root[data-theme="winter"] .schedule {
+  --paper: #13243a; --paper-2: rgb(255 255 255 / 0.08); --card: rgb(10 20 34 / 0.78);
+  --line: rgb(255 255 255 / 0.14); --ink: var(--frost); --ink-soft: #c3d2e2; --muted: #8fa1b6;
+  --primary: var(--ice);
+  background: var(--snow-pattern) repeat 0 0 / 180px, linear-gradient(#1d3a57, #13243a);
+  color: var(--ink);
+}
+:root[data-theme="winter"] .month-title h2 {
+  background: linear-gradient(180deg, #ffffff 15%, #9cc8ec 95%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 3px 0 rgb(0 0 0 / 0.35));
+}
+:root[data-theme="winter"] .month-title .script {
+  display: inline-block; margin-top: 0.75rem; padding: 0.6rem 2.4rem 0.6rem 1.3rem;
+  font: clamp(0.78rem, 3.3vw, 1.3rem)/1.15 var(--font-display); letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;
+  color: #ffffff; background: linear-gradient(90deg, #c8404a, #9e2730);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%);
+}
+:root[data-theme="winter"] .view-toggle button[aria-pressed="true"] { background: var(--frost); color: var(--navy); }
+:root[data-theme="winter"] .sched-list {
+  border-top: 0; border-radius: var(--radius); padding: 0.25rem 1rem;
+  background: rgb(10 20 34 / 0.74); box-shadow: 0 10px 30px rgb(0 0 0 / 0.3);
+}
+:root[data-theme="winter"] .sched-row:last-child { border-bottom: 0; }
+:root[data-theme="winter"] .badge-today,
+:root[data-theme="winter"] .cal-cell.is-today .cal-day { color: var(--navy); }
+:root[data-theme="winter"] .schedule .addcal-menu { --ink: #1b2533; --paper: #f2f6f9; --primary: #a8323a; }
+:root[data-theme="winter"] .cal-dow { background: #a8323a; color: #ffffff; }
+:root[data-theme="winter"] .chip { background: color-mix(in srgb, var(--v) 22%, #0c1828); }
+:root[data-theme="winter"] .chip:hover { background: color-mix(in srgb, var(--v) 34%, #0c1828); }
+@media (max-width: 640px) { :root[data-theme="winter"] .sched-list { padding-inline: 0.6rem; } }
+
+/* ---------- light sections ---------- */
+:root[data-theme="winter"] .section-head h2,
+:root[data-theme="winter"] .stats dd { color: var(--heading); }
+:root[data-theme="winter"] .reels .section-head h2 { color: var(--frost); }
+:root[data-theme="winter"] .section-head .script::after {
+  content: ""; display: inline-block; width: 0.6em; height: 0.6em; margin-left: 0.25em; vertical-align: 0.05em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%237fb0d6' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 2.5v19M3.8 7.25l16.4 9.5M3.8 16.75l16.4-9.5M9.5 4.2 12 6.5l2.5-2.3M9.5 19.8 12 17.5l2.5 2.3'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* ---------- reels ---------- */
+:root[data-theme="winter"] .reels { background: var(--snow-pattern) repeat 0 0 / 180px, linear-gradient(#13243a, #0d1a2b); }
+:root[data-theme="winter"] .reel-placeholder { --ph-bg: linear-gradient(160deg, #d6ebf9, #3d6a96 55%, #13243a); }
+:root[data-theme="winter"] .reel-placeholder:nth-child(2) { --ph-bg: linear-gradient(160deg, #eef2f6, #7d94ad 55%, #1b2533); }
+:root[data-theme="winter"] .reel-placeholder:nth-child(3) { --ph-bg: linear-gradient(160deg, #f3c6cb, #a8323a 55%, #2b1a24); }
+
+/* ---------- footer ---------- */
+:root[data-theme="winter"] .site-footer { background: var(--snow-pattern) repeat 0 0 / 180px, var(--navy-deep); color: #e6eef6; }
+:root[data-theme="winter"] .footer-h { color: #a9c4de; }
+:root[data-theme="winter"] .footer-note { color: #9fb3c8; }
+
+:root[data-theme="winter"] .theme-switch button[aria-pressed="true"] { background: var(--ice); color: var(--navy); }
