@@ -529,7 +529,7 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .footer-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.25rem; }
 .footer-links a { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.4rem 0; text-decoration: none; font-weight: 500; }
 .footer-links a:hover { text-decoration: underline; }
-.footer-note { padding-block: 1.25rem 2rem; margin: 0; border-top: 1px solid rgb(255 255 255 / 0.15); font-size: 0.92rem; color: #b7c6e6; }
+.footer-note { padding-block: 1.25rem 2rem; margin: 0 auto; border-top: 1px solid rgb(255 255 255 / 0.15); font-size: 0.92rem; color: #b7c6e6; }
 @media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
 
 /* ==========================================================================
