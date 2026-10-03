@@ -44,7 +44,9 @@
 /* ---------- base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); -webkit-text-size-adjust: 100%; }
+/* --header-offset is the sticky header's measured height (set in main.js), so
+   nav links land each section right under the header. */
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-offset, var(--header-h)); -webkit-text-size-adjust: 100%; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {

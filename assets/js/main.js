@@ -558,6 +558,15 @@
   /* ---------------- chrome: nav + dropdowns ---------------- */
 
   function wireChrome() {
+    // Keep in-page jumps flush with the sticky header. Tuck the section 1px under
+    // the header's bottom border so sub-pixel rounding never shows the section above.
+    const header = $(".site-header");
+    const setHeaderOffset = () => document.documentElement.style.setProperty(
+      "--header-offset", `${Math.max(0, Math.ceil(header.getBoundingClientRect().height) - 1)}px`);
+    setHeaderOffset();
+    if ("ResizeObserver" in window) new ResizeObserver(setHeaderOffset).observe(header);
+    else addEventListener("resize", setHeaderOffset);
+
     const btn = $(".menu-btn");
     const nav = $("#site-nav");
     const close = () => { nav.classList.remove("is-open"); btn.setAttribute("aria-expanded", "false"); };
