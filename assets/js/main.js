@@ -87,7 +87,7 @@
     return [String(n), s];
   }
   function fmtTime(t) {
-    if (!t) return "All day";
+    if (!t) return "Time TBA";
     const [H, M] = t.split(":").map(Number);
     const ap = H >= 12 ? "pm" : "am";
     const h12 = H % 12 || 12;
@@ -113,15 +113,18 @@
   function fromJsonEvents(list) {
     const seen = new Set();
     return (Array.isArray(list) ? list : []).map((e) => {
-      const m = /^(\d{4}-\d{2}-\d{2})(?:[T ](\d{2}:\d{2}))?/.exec(String(e?.start || ""));
+      // "date" + "time" ("20:00" or "TBA"); older files used a single "start".
+      const m = /^(\d{4}-\d{2}-\d{2})(?:[T ](\d{2}:\d{2}))?/.exec(String(e?.date || e?.start || ""));
       if (!m) return null;
+      const t = /^(\d{1,2}):(\d{2})$/.exec(String(e.time || "").trim());
+      const time = t ? `${t[1].padStart(2, "0")}:${t[2]}` : (e.time ? null : m[2] || null);
       const slug = String(e.venue || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-      let id = `ev-${m[1]}-${(m[2] || "").replace(":", "")}-${slug}`;
+      let id = `ev-${m[1]}-${(time || "tba").replace(":", "")}-${slug}`;
       for (let n = 2; seen.has(id); n++) id = id.replace(/~\d+$/, "") + `~${n}`;
       seen.add(id);
       return {
         id,
-        date: m[1], time: m[2] || null,
+        date: m[1], time,
         venue: String(e.venue || "").trim(),
         title: String(e.title || "").trim(),
         note: String(e.note || "").trim(),
@@ -162,6 +165,7 @@
   /* Match an event's venue text to a configured venue. Google Calendar
      events may put the venue in the location or the title. */
   const GENERIC_TITLE = /^(sage hall[\s:–—-]*)?((country )?swing( dance| dancing| night)?|dance( night)?|dancing|night)?$/i;
+  const TBA = /^(location\s+)?(tba|tbd)$/i;
   function resolveVenues(events, venues) {
     const byName = venues.map((v) => ({
       ...v,
@@ -170,6 +174,10 @@
       addrKeys: v.address.toLowerCase().split(",").slice(0, 2).map((s) => s.trim()).filter((s) => s.length > 4),
     }));
     return events.map((ev) => {
+      if (!ev.venue || TBA.test(ev.venue.trim())) {
+        const v = { name: "Location TBA", address: "", color: "ink", ages21: false, note: "", tba: true };
+        return { ...ev, v, ages21: /\b21\s*\+/.test(`${ev.title} ${ev.note}`) };
+      }
       const loc = ev.venue.toLowerCase();
       const ttl = ev.title.toLowerCase();
       let v = byName.find((x) => x.key === loc)
@@ -196,8 +204,8 @@
     return { date: end.toISOString().slice(0, 10), time: end.toISOString().slice(11, 16) };
   }
   const eventTitle = (ev) => `Sage Hall: ${ev.title || "Country Swing"}${ev.title ? "" : ` at ${ev.v.name}`}`;
-  const eventLocation = (ev) => [ev.v.name, ev.v.address && ev.v.address !== ev.v.name ? ev.v.address : ""].filter(Boolean).join(", ");
-  const eventDetails = (ev) => [ev.title ? `At ${ev.v.name}.` : "", ev.note, ev.ages21 ? "21+ only." : "", "Schedule: " + location.origin + location.pathname].filter(Boolean).join(" ");
+  const eventLocation = (ev) => ev.v.tba ? "" : [ev.v.name, ev.v.address && ev.v.address !== ev.v.name ? ev.v.address : ""].filter(Boolean).join(", ");
+  const eventDetails = (ev) => [ev.title && !ev.v.tba ? `At ${ev.v.name}.` : "", ev.time ? "" : "Start time to be announced.", ev.v.tba ? "Location to be announced." : "", ev.note, ev.ages21 ? "21+ only." : "", "Schedule: " + location.origin + location.pathname].filter(Boolean).join(" ");
 
   function googleUrl(ev) {
     const end = endOf(ev);
@@ -350,7 +358,7 @@
     ].filter(Boolean));
     card.append(h("div", { class: "ticket-stub" },
       addToCalendar(next),
-      h("a", { class: "btn-dir", href: mapsUrl(next.v), target: "_blank", rel: "noopener" }, icon("pin"), h("span", { text: "Directions" })),
+      next.v.tba ? null : h("a", { class: "btn-dir", href: mapsUrl(next.v), target: "_blank", rel: "noopener" }, icon("pin"), h("span", { text: "Directions" })),
     ));
     const more = list.slice(1, 4);
     if (more.length) {
@@ -407,17 +415,15 @@
       const [n, suf] = ordinal(d);
       const past = ev.date < state.today;
       const cls = ["sched-row", `v-${ev.v.color}`, past && "is-past", ev.cancelled && "is-cancelled", ev.date === state.today && "is-today"].filter(Boolean).join(" ");
-      const sub = [];
-      if (ev.title) sub.push(h("strong", { text: ev.title }));
-      if (ev.title && ev.note) sub.push(" · ");
-      if (ev.note) sub.push(ev.note);
+      // A special night leads with its title; the venue moves to the sub-line.
+      const sub = [ev.title ? ev.v.name : "", ev.note].filter(Boolean).join(" · ");
       return h("li", { class: cls, id: ev.id },
         h("span", { class: "d-num" }, n, h("sup", { text: suf })),
         h("span", { class: "d-dow", text: DOW[dowOf(ev.date)] }),
         h("div", { class: "d-main" },
-          h("div", { class: "d-venue" }, h("span", { class: "dot" }), h("span", { class: "v-name", text: ev.v.name }), venueBadges(ev),
+          h("div", { class: "d-venue" }, h("span", { class: "dot" }), h("span", { class: `v-name${ev.title ? " is-special" : ""}`, text: ev.title || ev.v.name }), venueBadges(ev),
             ev.date === state.today && !ev.cancelled ? h("span", { class: "badge badge-today", text: "Tonight" }) : null),
-          sub.length ? h("div", { class: "d-sub" }, sub) : null),
+          sub ? h("div", { class: "d-sub", text: sub }) : null),
         h("span", { class: "d-time", text: fmtTime(ev.time) }),
         h("span", { class: "addcal-slot" }, !past && !ev.cancelled ? addToCalendar(ev, { compact: true }) : null),
       );
@@ -441,7 +447,7 @@
           type: "button", class: `chip v-${ev.v.color}${ev.cancelled ? " is-cancelled" : ""}`,
           "aria-label": `${fmtShort(ev.date)}, ${fmtTime(ev.time)}, ${ev.v.name}${ev.cancelled ? ", cancelled" : ""}. Show in list.`,
           onclick: () => showInList(ev.id),
-        }, h("span", { class: "ct", text: fmtTime(ev.time) }), h("span", { class: "cv", text: ev.title || ev.v.name })))));
+        }, h("span", { class: "ct", text: ev.time ? fmtTime(ev.time) : "TBA" }), h("span", { class: "cv", text: ev.title || ev.v.name })))));
     }
     const trail = (7 - ((lead + days) % 7)) % 7;
     for (let i = 0; i < trail; i++) cells.push(h("div", { class: "cal-cell is-out", "aria-hidden": "true" }));

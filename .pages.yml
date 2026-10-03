@@ -21,24 +21,46 @@ content:
         list:
           collapsible:
             collapsed: true
-            summary: "{start} · {venue}"
+            summary: "{date} · {venue}"
         fields:
-          - name: start
-            label: Date & start time
+          - name: date
+            label: Date
             type: date
             required: true
+          - name: time
+            label: Start time
+            type: select
+            required: true
+            description: Pick "Time TBA" if it hasn't been announced yet.
             options:
-              time: true
+              values:
+                - { value: "TBA", label: "Time TBA" }
+                - { value: "17:00", label: "5:00 PM" }
+                - { value: "17:30", label: "5:30 PM" }
+                - { value: "18:00", label: "6:00 PM" }
+                - { value: "18:30", label: "6:30 PM" }
+                - { value: "19:00", label: "7:00 PM" }
+                - { value: "19:30", label: "7:30 PM" }
+                - { value: "20:00", label: "8:00 PM" }
+                - { value: "20:30", label: "8:30 PM" }
+                - { value: "21:00", label: "9:00 PM" }
+                - { value: "21:30", label: "9:30 PM" }
+                - { value: "22:00", label: "10:00 PM" }
+                - { value: "22:30", label: "10:30 PM" }
+                - { value: "23:00", label: "11:00 PM" }
+                - { value: "23:30", label: "11:30 PM" }
           - name: venue
             label: Venue
             type: select
             required: true
-            description: To add a new venue, add it under Site settings → Venues, then add it to this list in .pages.yml.
+            description: Pick "Location TBA" if it isn't set yet. To add a new venue, add it under Site settings → Venues, then add it to this list in .pages.yml.
             options:
               values:
                 - Fairgrounds Event Center
+                - Fairgrounds Indoor Barn
                 - Mountain Valley Athletics
                 - Cache Bar
+                - Location TBA
           - name: title
             label: Special title (optional)
             type: string

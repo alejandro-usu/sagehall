@@ -1,5 +1,5 @@
 {
-  "announcement": "October schedule drops soon. Follow @sage.hall.utah for the flyer.",
+  "announcement": "The October schedule is up! Don't miss the Whispering Canyon Fundraiser on Thursday, Oct 15.",
   "instagram": "sage.hall.utah",
   "facebook": "https://www.facebook.com/sage.hall.utah/",
   "admission": "$6 students · $7 general",
@@ -11,6 +11,13 @@
       "color": "denim",
       "ages21": false,
       "note": "The home floor. Tuesday nights start with a lesson."
+    },
+    {
+      "name": "Fairgrounds Indoor Barn",
+      "address": "Cache County Fairgrounds, 450 S 500 W, Logan, UT 84321",
+      "color": "gold",
+      "ages21": false,
+      "note": "The indoor barn at the fairgrounds."
     },
     {
       "name": "Mountain Valley Athletics",

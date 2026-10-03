@@ -364,11 +364,12 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
 .sched-row .d-main { min-width: 0; }
 .sched-row .d-venue { display: flex; align-items: center; flex-wrap: wrap; gap: 0.35rem 0.6rem; font-size: 1.45rem; font-weight: 500; line-height: 1.15; }
 .sched-row .d-sub { font: 500 0.98rem/1.35 var(--font-body); color: var(--ink-soft); margin-top: 0.15rem; }
-.sched-row .d-sub strong { color: var(--rose); font-weight: 700; }
+.sched-row .v-name.is-special { color: var(--rose); font-weight: 600; }
 .sched-row .d-time { font-size: 1.55rem; font-weight: 600; color: var(--copper); white-space: nowrap; }
 .sched-row.is-past { color: var(--muted); }
 .sched-row.is-past .d-dow, .sched-row.is-past .d-time { color: var(--muted); }
 .sched-row.is-past .dot { opacity: 0.5; }
+.sched-row.is-past .v-name.is-special { color: inherit; }
 .sched-row.is-cancelled .v-name, .sched-row.is-cancelled .d-time { text-decoration: line-through; text-decoration-thickness: 2px; }
 .sched-row.is-today { background: color-mix(in srgb, var(--denim) 7%, transparent); }
 .sched-row .addcal-slot { width: 40px; }

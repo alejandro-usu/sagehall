@@ -69,7 +69,8 @@ Some details came from older public listings and should be confirmed:
 - [ ] Addresses for Mountain Valley Athletics and Cache Bar (blank for now, so Directions searches by name)
 - [ ] About-section facts (opened 2021, founders, 400–600 dancers a week, "biggest dance floor in Utah")
 - [ ] First-timer and FAQ copy. It's placeholder text.
-- [ ] The October schedule, which isn't in `data/events.json` yet
+- [ ] Fairgrounds Indoor Barn address (assumed to be at the Cache County Fairgrounds)
+- [ ] Time and location for the Whispering Canyon Fundraiser (Oct 15) and USU Swing Club (Oct 22), both TBA on the flyer
 
 ## Where things live
 
