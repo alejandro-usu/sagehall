@@ -1,0 +1,55 @@
+# When staff upload photos through the editor, shrink them for the web
+# (see .github/scripts/shrink_photos.py), commit the smaller files and ask
+# GitHub Pages to republish.
+name: Shrink uploaded photos
+
+on:
+  push:
+    branches: [main]
+    paths: ["assets/uploads/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: shrink-photos
+  cancel-in-progress: false
+
+jobs:
+  shrink:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow
+        run: pip install pillow
+
+      - name: Shrink photos
+        run: python .github/scripts/shrink_photos.py
+
+      - name: Commit the smaller photos
+        id: commit
+        run: |
+          if git diff --quiet; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Shrink uploaded photos for the web"
+          git pull --rebase origin main
+          git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # Pushes made by this workflow don't trigger a Pages build on their own.
+      - name: Republish the site
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages will pick it up on the next change."

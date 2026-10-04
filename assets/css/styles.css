@@ -517,6 +517,104 @@ svg { width: 1.15em; height: 1.15em; flex: none; }
   .reel-placeholder { max-width: none; }
 }
 
+/* ---------- on the floor: dancers of the week ---------- */
+.spotlight {
+  display: grid; grid-template-columns: minmax(220px, 0.85fr) 1.15fr;
+  max-width: 940px; margin: 0 auto clamp(40px, 6vw, 64px);
+  background: var(--card); color: var(--ink); border-radius: 20px; overflow: hidden;
+  box-shadow: 0 16px 40px rgb(0 0 0 / 0.35);
+}
+.spot-media { position: relative; min-height: 300px; background: var(--paper-2); }
+.spot-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.spot-media.has-reel { display: grid; place-items: center; padding: 16px; background: var(--night); }
+.spot-media.has-reel .instagram-media { margin: 0 !important; min-width: 0 !important; width: 100% !important; max-width: 340px; border-radius: 12px; }
+.spot-media.is-empty {
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--primary) 35%, var(--card)) 0%, var(--primary) 78%);
+}
+.spot-badge {
+  display: grid; place-items: center; width: 132px; aspect-ratio: 1; border-radius: 50%;
+  background: var(--card); color: #e9b949;
+  box-shadow: 0 0 0 8px rgb(255 255 255 / 0.18), 0 10px 24px rgb(0 0 0 / 0.25);
+}
+.spot-badge svg { width: 64px; height: 64px; }
+.spot-body { display: flex; flex-direction: column; justify-content: center; gap: 0.65rem; padding: clamp(24px, 4vw, 44px); }
+.spot-kicker {
+  display: inline-flex; align-items: center; gap: 0.5rem; margin: 0;
+  font: 0.95rem/1 var(--font-display); letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary);
+}
+.spot-kicker svg { color: #e9b949; }
+.spot-week { margin: 0; font: 600 1rem/1 var(--font-cond); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.spot-names { margin: 0.15rem 0 0; font: clamp(2rem, 4.6vw, 3rem)/1.02 var(--font-display); letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); }
+.spotlight.is-empty .spot-names { font-size: clamp(1.5rem, 3.2vw, 2.1rem); }
+.spot-text { margin: 0; font-size: 1.1rem; color: var(--ink-soft); }
+.spot-actions { margin: 0.25rem 0 0; }
+.spot-nominate { margin: 0.35rem 0 0; font-size: 0.98rem; color: var(--muted); }
+@media (max-width: 720px) {
+  .spotlight { grid-template-columns: 1fr; }
+  .spot-media { min-height: 0; aspect-ratio: 4 / 3; }
+  .spot-media.has-reel { aspect-ratio: auto; }
+  .spot-media.is-empty { aspect-ratio: 16 / 7; }
+  .spot-badge { width: 96px; }
+  .spot-badge svg { width: 46px; height: 46px; }
+}
+
+/* ---------- on the floor: section sub-heads + weekly photos ---------- */
+.floor-subhead {
+  display: flex; align-items: center; gap: 1rem; margin: 0 0 1.25rem;
+  font: 600 1.1rem/1 var(--font-cond); letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent-light);
+}
+.floor-subhead::before, .floor-subhead::after { content: ""; flex: 1; height: 1px; background: rgb(255 255 255 / 0.18); }
+.photos-head { margin-top: clamp(40px, 6vw, 64px); }
+.photos-head .floor-subhead { margin-bottom: 0.5rem; }
+.photos-week { margin: 0 0 1.25rem; text-align: center; font: 500 1rem/1 var(--font-cond); letter-spacing: 0.12em; text-transform: uppercase; color: rgb(255 255 255 / 0.72); }
+.photos-head .floor-subhead:last-child { margin-bottom: 1.25rem; }
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; }
+.photo {
+  position: relative; display: block; padding: 0; border: 0; border-radius: 12px; overflow: hidden;
+  aspect-ratio: 1; background: rgb(255 255 255 / 0.06); cursor: zoom-in;
+}
+.photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.photo:hover img { transform: scale(1.04); }
+.photo:focus-visible { outline: 3px solid var(--accent-light); outline-offset: 3px; }
+.photos-empty {
+  grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  padding: 2.25rem 1rem; border: 2px dashed rgb(255 255 255 / 0.25); border-radius: 16px;
+  text-align: center; color: rgb(255 255 255 / 0.85);
+}
+.photos-empty svg { width: 40px; height: 40px; color: var(--accent-light); }
+.photos-empty p { margin: 0; font-size: 1.05rem; }
+.photos-empty small { color: rgb(255 255 255 / 0.6); font-size: 0.92rem; }
+.photos-note { margin: 1rem 0 0; text-align: center; font-size: 0.95rem; color: rgb(255 255 255 / 0.72); }
+.photos-note a { color: #fff; }
+@media (max-width: 480px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* photo viewer */
+html:has(.lightbox[open]) { overflow: hidden; }
+.lightbox {
+  width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; margin: 0; padding: 0;
+  border: 0; background: transparent; color: #f3ede4;
+}
+.lightbox[open] { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; }
+.lightbox::backdrop { background: rgb(10 8 6 / 0.9); }
+.lb-figure { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin: 0; min-width: 0; }
+.lb-figure img { max-width: min(92vw, 1400px); max-height: 82vh; width: auto; height: auto; border-radius: 10px; box-shadow: 0 20px 50px rgb(0 0 0 / 0.5); }
+.lb-figure figcaption { padding-inline: 1rem; text-align: center; font-size: 1rem; }
+.lb-btn {
+  display: grid; place-items: center; width: 52px; height: 52px; margin: 0 14px; border: 0; border-radius: 50%;
+  background: rgb(255 255 255 / 0.14); color: #fff; cursor: pointer;
+}
+.lb-btn:hover { background: rgb(255 255 255 / 0.26); }
+.lb-btn svg { width: 26px; height: 26px; }
+.lb-close { position: fixed; top: 16px; right: 16px; margin: 0; }
+@media (max-width: 640px) {
+  .lightbox[open] { grid-template-columns: minmax(0, 1fr); }
+  .lb-prev, .lb-next { position: fixed; bottom: max(20px, env(safe-area-inset-bottom)); margin: 0; }
+  .lb-prev { left: calc(50% - 66px); }
+  .lb-next { right: calc(50% - 66px); }
+  .lb-figure img { max-height: 72vh; }
+}
+
 /* ---------- about ---------- */
 .about { padding-block: var(--section-pad); }
 .about-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(28px, 5vw, 64px); align-items: center; }

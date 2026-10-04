@@ -5,7 +5,9 @@
 
 media:
   input: assets/uploads
-  output: /assets/uploads
+  # no leading slash: the site lives under /sagehall/ on GitHub Pages, so paths stay relative
+  output: assets/uploads
+  extensions: [jpg, jpeg, png, webp]
 
 content:
   - name: events
@@ -73,6 +75,57 @@ content:
             label: Cancelled
             type: boolean
             description: Keeps the night on the calendar but marks it cancelled.
+
+  - name: weekly
+    label: Dancers of the Week & photos
+    description: Update once a week. Leave Dancers of the Week blank to show "first pick coming soon". Only feature people who are happy to be on the site.
+    type: file
+    path: data/weekly.json
+    format: json
+    fields:
+      - name: dancers
+        label: Dancers of the Week
+        type: object
+        fields:
+          - name: week_of
+            label: Week of
+            type: date
+          - name: names
+            label: Names
+            type: string
+            description: e.g. "Jake & Maria"
+          - name: shoutout
+            label: Shout-out
+            type: text
+            description: One or two sentences, e.g. "Lit up the floor at the Indoor Barn on Tuesday."
+          - name: photo
+            label: Photo
+            type: image
+            description: Upload straight from your phone; the site shrinks it automatically.
+          - name: reel
+            label: Instagram reel link (optional)
+            type: string
+            description: Shown as a "Watch their reel" button, or in place of the photo if there isn't one.
+      - name: photos_week_of
+        label: Photos are from the week of
+        type: date
+      - name: photos
+        label: This week's photos
+        description: Up to 12. Replace them each week; the first ones show first.
+        type: object
+        list:
+          max: 12
+          collapsible:
+            collapsed: true
+            summary: "{caption}"
+        fields:
+          - name: image
+            label: Photo
+            type: image
+            required: true
+          - name: caption
+            label: Caption (optional)
+            type: string
 
   - name: settings
     label: Site settings

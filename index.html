@@ -52,7 +52,7 @@
         <a href="#schedule">Schedule</a>
         <a href="#first-time">First time?</a>
         <a href="#venues">Venues</a>
-        <a href="#reels">Reels</a>
+        <a href="#reels">On the floor</a>
         <a href="#about">About</a>
         <a class="nav-cta" data-instagram-link href="https://www.instagram.com/sage.hall.utah/" target="_blank" rel="noopener">
           <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-instagram"/></svg>
@@ -170,14 +170,27 @@
       </div>
     </section>
 
-    <!-- ============ REELS ============ -->
+    <!-- ============ ON THE FLOOR: dancers of the week, reels, photos ============ -->
     <section class="reels" id="reels" aria-labelledby="reels-h">
       <div class="wrap">
         <header class="section-head">
           <p class="script">from the dance floor</p>
-          <h2 id="reels-h">Reels</h2>
+          <h2 id="reels-h">On the floor</h2>
         </header>
+
+        <div class="spotlight-slot" id="spotlight"></div>
+
+        <h3 class="floor-subhead">Reels</h3>
         <div class="reel-grid" id="reel-grid"></div>
+
+        <div class="photos-head">
+          <h3 class="floor-subhead" id="photos-h">This week's photos</h3>
+          <p class="photos-week" id="photos-week" hidden></p>
+        </div>
+        <div class="photo-grid" id="photo-grid" role="group" aria-labelledby="photos-h"></div>
+        <p class="photos-note" id="photos-note" hidden>
+          In a photo and want it taken down? <a data-instagram-link href="https://www.instagram.com/sage.hall.utah/" target="_blank" rel="noopener">Message us on Instagram</a>.
+        </p>
         <p class="reels-follow">
           <a class="btn btn-light" data-instagram-link href="https://www.instagram.com/sage.hall.utah/" target="_blank" rel="noopener">
             <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-instagram"/></svg>
@@ -233,6 +246,23 @@
     <p class="wrap footer-note">© <span id="year">2026</span> Sage Hall · Concept redesign mock-up, not the official site. Visit <a href="https://sagehalldance.com">sagehalldance.com</a> for official info.</p>
   </footer>
 
+  <!-- Photo viewer for "This week's photos" -->
+  <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+    <button class="lb-btn lb-close" type="button" aria-label="Close">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-close"/></svg>
+    </button>
+    <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chev-left"/></svg>
+    </button>
+    <figure class="lb-figure">
+      <img id="lb-img" alt="">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+    <button class="lb-btn lb-next" type="button" aria-label="Next photo">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chev-right"/></svg>
+    </button>
+  </dialog>
+
   <!-- Season switch (shown when Site settings → "Show theme switcher" is on) -->
   <div class="theme-switch" id="theme-switch" role="group" aria-label="Site theme" hidden>
     <button type="button" data-theme-choice="spring" aria-pressed="false" aria-label="Spring">
@@ -266,6 +296,8 @@
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.6" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></g></symbol>
     <symbol id="i-snowflake" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 2.5v19M3.8 7.25l16.4 9.5M3.8 16.75l16.4-9.5"/><path d="M9.5 4.2 12 6.5l2.5-2.3M9.5 19.8 12 17.5l2.5 2.3M4.4 10.4l3.3-.9-1-3.2M19.6 13.6l-3.3.9 1 3.2M4.4 13.6l3.3.9-1 3.2M19.6 10.4l-3.3-.9 1-3.2"/></g></symbol>
     <symbol id="i-mountain" viewBox="0 0 24 24"><path d="M1.5 20 L8.5 7.5 L12.5 14 L15.5 9.5 L22.5 20 Z" fill="currentColor"/><path d="M8.5 7.5 L10.7 11.4 L9.4 10.7 L8.4 11.7 L7.4 10.8 L6.5 11.2 Z" fill="#fff" opacity="0.9"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7.5h3.2L9 5h6l1.8 2.5H20a1 1 0 011 1V19a1 1 0 01-1 1H4a1 1 0 01-1-1V8.5a1 1 0 011-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.1 6.6.5-5 4.4 1.5 6.5L12 16.6 6.3 20l1.5-6.5-5-4.4 6.6-.5z" fill="currentColor"/></symbol>
   </svg>
 </body>

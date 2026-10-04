@@ -285,7 +285,7 @@
 
   /* ---------------- rendering ---------------- */
 
-  const state = { site: {}, venues: [], events: [], today: "", month: "", minMonth: "", maxMonth: "", view: "list", source: "json" };
+  const state = { site: {}, weekly: {}, photos: [], venues: [], events: [], today: "", month: "", minMonth: "", maxMonth: "", view: "list", source: "json" };
 
   const upcoming = () => state.events.filter((e) => e.date >= state.today && !e.cancelled);
   const igHandle = () => String(state.site.instagram || "").replace(/^@/, "").trim();
@@ -543,16 +543,122 @@
         h("span", { text: "Paste an Instagram reel link in Site settings to fill this spot." }))));
       return;
     }
-    grid.replaceChildren(...urls.map((u) => h("div", { class: "reel" },
-      h("blockquote", { class: "instagram-media", "data-instgrm-permalink": u, "data-instgrm-version": "14" },
-        h("a", { href: u, target: "_blank", rel: "noopener", text: "Watch this reel on Instagram" })))));
-    // Only pull in Instagram's script once the section is close to the screen.
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver((entries) => {
-        if (entries.some((e) => e.isIntersecting)) { io.disconnect(); loadInstagramEmbeds(); }
-      }, { rootMargin: "600px 0px" });
-      io.observe(grid);
-    } else loadInstagramEmbeds();
+    grid.replaceChildren(...urls.map((u) => h("div", { class: "reel" }, reelEmbed(u))));
+    whenNear(grid, loadInstagramEmbeds);
+  }
+
+  const reelEmbed = (url) => h("blockquote", { class: "instagram-media", "data-instgrm-permalink": url, "data-instgrm-version": "14" },
+    h("a", { href: url, target: "_blank", rel: "noopener", text: "Watch this reel on Instagram" }));
+
+  // Run fn once el is close to the screen (used to load Instagram's script lazily).
+  function whenNear(el, fn) {
+    if (!("IntersectionObserver" in window)) { fn(); return; }
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { io.disconnect(); fn(); }
+    }, { rootMargin: "600px 0px" });
+    io.observe(el);
+  }
+
+  /* ---------------- on the floor: dancers of the week + weekly photos ---------------- */
+
+  // Uploaded images are stored relative to the site root (assets/uploads/...).
+  // Allow those and https links; refuse any other URL scheme.
+  function mediaUrl(raw) {
+    const s = String(raw || "").trim();
+    if (!s) return "";
+    if (/^https:\/\//i.test(s)) return s;
+    if (/^[a-z][\w+.-]*:/i.test(s) || s.startsWith("//")) return "";
+    return s.replace(/^\/+/, "");
+  }
+  function weekOf(iso) {
+    const m = /^(\d{4}-\d{2}-\d{2})/.exec(String(iso || ""));
+    if (!m) return "";
+    const [, mo, d] = ymd(m[1]);
+    return `Week of ${MON[mo - 1]} ${d}`;
+  }
+
+  function renderSpotlight() {
+    const d = state.weekly.dancers || {};
+    const names = String(d.names || "").trim();
+    const photo = mediaUrl(d.photo);
+    const reel = normalizeInstagram(d.reel || "");
+    const kicker = () => h("p", { class: "spot-kicker" }, icon("star"), "Dancers of the Week");
+    const badge = () => h("div", { class: "spot-media is-empty", "aria-hidden": "true" }, h("span", { class: "spot-badge" }, icon("star")));
+    const nominate = h("p", { class: "spot-nominate" }, "Know someone who should be next? ",
+      h("a", { href: igUrl(), target: "_blank", rel: "noopener", text: "Tell us on Instagram" }), ".");
+
+    if (!names) {
+      // A new tradition: no pick yet.
+      $("#spotlight").replaceChildren(h("article", { class: "spotlight is-empty" }, badge(),
+        h("div", { class: "spot-body" }, kicker(),
+          h("h3", { class: "spot-names", text: "Our first pick is coming soon" }),
+          h("p", { class: "spot-text", text: "A new Sage Hall tradition: every week we'll shout out dancers who lit up the floor." }),
+          nominate)));
+      return;
+    }
+    const media = photo ? h("div", { class: "spot-media" }, h("img", { src: photo, alt: `${names}, Sage Hall Dancers of the Week`, loading: "lazy" }))
+      : reel ? h("div", { class: "spot-media has-reel" }, reelEmbed(reel))
+      : badge();
+    const week = weekOf(d.week_of);
+    const card = h("article", { class: "spotlight" }, media,
+      h("div", { class: "spot-body" }, kicker(),
+        week ? h("p", { class: "spot-week", text: week }) : null,
+        h("h3", { class: "spot-names", text: names }),
+        d.shoutout ? h("p", { class: "spot-text", text: String(d.shoutout).trim() }) : null,
+        photo && reel ? h("p", { class: "spot-actions" },
+          h("a", { class: "btn btn-primary btn-small", href: reel, target: "_blank", rel: "noopener" }, icon("play"), h("span", { text: "Watch their reel" }))) : null,
+        nominate));
+    $("#spotlight").replaceChildren(card);
+    if (!photo && reel) whenNear(card, loadInstagramEmbeds);
+  }
+
+  function renderPhotos() {
+    state.photos = (state.weekly.photos || [])
+      .map((p) => ({ src: mediaUrl(p?.image), caption: String(p?.caption || "").trim() }))
+      .filter((p) => p.src).slice(0, 12);
+    const n = state.photos.length;
+    const week = weekOf(state.weekly.photos_week_of);
+    $("#photos-week").textContent = week;
+    $("#photos-week").hidden = !(week && n);
+    $("#photos-note").hidden = !n;
+    if (!n) {
+      $("#photo-grid").replaceChildren(h("div", { class: "photos-empty" }, icon("camera"),
+        h("p", { text: "Photos from this week's dances will show up here." }),
+        h("small", { text: "Staff: add them under Dancers of the Week & photos." })));
+      return;
+    }
+    $("#photo-grid").replaceChildren(...state.photos.map((p, i) => h("button", {
+      type: "button", class: "photo",
+      "aria-label": `Open photo ${i + 1} of ${n}${p.caption ? `: ${p.caption}` : ""}`,
+      onclick: () => openPhoto(i),
+    }, h("img", { src: p.src, alt: p.caption || "Dancers at Sage Hall", loading: "lazy" }))));
+  }
+
+  let photoIndex = 0;
+  function showPhoto(i) {
+    const n = state.photos.length;
+    photoIndex = (i + n) % n;
+    const p = state.photos[photoIndex];
+    $("#lb-img").src = p.src;
+    $("#lb-img").alt = p.caption || "Dancers at Sage Hall";
+    $("#lb-cap").textContent = `${p.caption ? `${p.caption} · ` : ""}${photoIndex + 1} of ${n}`;
+    for (const b of document.querySelectorAll(".lb-prev, .lb-next")) b.hidden = n < 2;
+  }
+  function openPhoto(i) {
+    showPhoto(i);
+    const dlg = $("#lightbox");
+    if (!dlg.open) dlg.showModal();
+  }
+  function wireLightbox() {
+    const dlg = $("#lightbox");
+    dlg.querySelector(".lb-close").addEventListener("click", () => dlg.close());
+    dlg.querySelector(".lb-prev").addEventListener("click", () => showPhoto(photoIndex - 1));
+    dlg.querySelector(".lb-next").addEventListener("click", () => showPhoto(photoIndex + 1));
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); // click outside the photo
+    dlg.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") showPhoto(photoIndex - 1);
+      if (e.key === "ArrowRight") showPhoto(photoIndex + 1);
+    });
   }
 
   /* ---------------- chrome: nav + dropdowns ---------------- */
@@ -677,6 +783,7 @@
     try { state.site = await getJSON("data/site.json"); }
     catch (err) { console.error("Couldn't load site settings", err); state.site = {}; }
     initTheme();
+    const weekly = getJSON("data/weekly.json").catch((err) => { console.warn("Couldn't load weekly highlights", err); return {}; });
 
     state.venues = (state.site.venues || []).filter((v) => v?.name).map((v) => ({
       name: String(v.name).trim(),
@@ -717,6 +824,10 @@
     renderFirstTime();
     renderVenues();
     renderReels();
+    state.weekly = (await weekly) || {};
+    renderSpotlight();
+    renderPhotos();
+    wireLightbox();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

@@ -8,7 +8,7 @@ A concept redesign for [Sage Hall](https://sagehalldance.com), the country swing
 - **Next dance** ticket at the top of the page, with directions and the next few nights.
 - **Staff sign-in** at `/admin` for editing the schedule, reels, venues and FAQ through simple forms ([Pages CMS](https://pagescms.org)). No code, no GitHub account needed.
 - **Optional Google Calendar sync.** Paste a calendar ID and the site reads the schedule live from Google Calendar instead.
-- **Instagram reels**: paste up to three reel links and they embed on the page.
+- **On the floor**: a weekly *Dancers of the Week* spotlight, up to three Instagram reels, and a *This week's photos* gallery with a full-screen viewer.
 - First-timer guide, FAQ, venues, and an about section.
 - **Four seasonal looks** that share the same schedule and content:
   - *Spring*: Cache Valley mountains and forest, with snow on the peaks, topo-map lines, a trail-sign ribbon and drifting aspen leaves.
@@ -70,7 +70,24 @@ All four looks are the same page with different styling, so they always show the
 
 Summer is the base stylesheet (`assets/css/styles.css`). Each other season is a small file on top of it (`theme-spring.css`, `theme-fall.css`, `theme-winter.css`), scoped to `<html data-theme="...">`. Venue colors stay the same in every season, so Cache Bar is always the same color.
 
-## 5. Instagram reels
+## 5. Dancers of the Week and weekly photos
+
+Staff update both under **Dancers of the Week & photos** in the editor (or from `/admin`):
+
+- **Dancers of the Week:** the week, names, a short shout-out, a photo, and optionally an Instagram reel link. Leave the names blank and the site shows "Our first pick is coming soon" (that's how it starts, since this is a new tradition).
+- **This week's photos:** up to 12 photos with optional captions, replaced each week. Visitors can tap one to view it full screen, and the section asks anyone who wants a photo taken down to message on Instagram.
+
+**Phone photos are shrunk automatically.** When a photo is uploaded, `.github/workflows/shrink-photos.yml` runs `.github/scripts/shrink_photos.py`, which:
+
+1. turns photos the right way up,
+2. resizes anything bigger than 1600px,
+3. strips camera data, including GPS location,
+4. commits the smaller file, keeping the same name,
+5. asks GitHub Pages to republish.
+
+It needs no setup beyond GitHub Actions being enabled on the repo (the default).
+
+## 6. Instagram reels
 
 In Instagram, open a reel and tap **Share → Copy link**, then paste the link under **Site settings → Instagram reels**. The first three show on the home page. Until reels are added, the section shows placeholder cards.
 
@@ -96,7 +113,10 @@ Some details came from older public listings and should be confirmed:
 | `index.html` | The page |
 | `admin/index.html` | Staff sign-in page with links to the editor and how-tos |
 | `data/events.json` | The dance schedule (edited through Pages CMS) |
-| `data/site.json` | Announcement, social links, venues, reels, FAQ, Google Calendar settings |
+| `data/site.json` | Announcement, theme, social links, venues, reels, FAQ, Google Calendar settings |
+| `data/weekly.json` | Dancers of the Week and this week's photos |
+| `assets/uploads/` | Photos uploaded through the editor |
+| `.github/workflows/shrink-photos.yml` | Shrinks uploaded photos and strips their location data |
 | `.pages.yml` | Pages CMS form definitions |
 | `assets/js/main.js` | Schedule, calendar export, Google Calendar sync, reels |
 | `assets/css/styles.css` | Styles (the Summer look) |
